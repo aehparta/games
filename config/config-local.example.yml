@@ -1,0 +1,24 @@
+modules:
+  Games\Game:
+    games:
+      - Quake2
+      - CS
+      - Cod2
+      - Cod4
+  Games\Quake2:
+    label: Action Quake
+    host: dev.lan
+    port: 27910
+    password: jussi
+  Games\CS:
+    host: dev.lan
+    port: 27015
+    password: jussi
+  Games\Cod2:
+    host: dev.lan
+    port: 28961
+    password: salaisuus
+  Games\Cod4:
+    host: dev.lan
+    port: 28960
+    password: salaisuus

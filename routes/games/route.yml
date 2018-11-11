@@ -1,0 +1,14 @@
+index:
+  pattern: '/'
+  controller: Games
+  action: index
+
+game:
+  pattern: '/game/{name}'
+  controller: Games
+  action: game
+
+game-map:
+  pattern: '/game/{name}/map/{map}'
+  controller: Games
+  action: gameMap

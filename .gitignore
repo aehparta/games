@@ -1,0 +1,8 @@
+vendor
+web/.htaccess
+*.sublime-workspace
+log
+kehikko
+kehikko.php
+routes/common
+web/common

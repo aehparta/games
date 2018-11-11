@@ -1,0 +1,37 @@
+en:
+  title:
+    site: 'Games'
+    home: 'Home'
+    404: 'Page not found'
+    500: 'Internal server error'
+  label:
+    email: 'Email'
+    name: 'Name'
+    account: 'Account'
+    username: 'Username'
+    password: 'Password'
+    lang: 'Language'
+  actions:
+    save: 'Save'
+    add: 'Add'
+    new: 'New'
+    delete: 'Delete'
+    remove: 'Remove'
+    hide: 'Hide'
+    show: 'Show'
+    create: 'Create'
+    modify: 'Modify'
+    cancel: 'Cancel'
+    upload: 'Send file'
+  msg:
+    error:
+      404: 'This page was not found.'
+      save: 'Save failed, please try again. If the problem persists, contact support.'
+  roles:
+    ftp:
+      title: 'FTP'
+      description: 'Allow FTP login.'
+    ftp-only:
+      title: 'Only FTP'
+      description: 'Only allow use of FTP with accounts using this role.'
+
