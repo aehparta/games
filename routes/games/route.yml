@@ -21,3 +21,10 @@ game-map-set:
   action: gameMapSet
   format: json
   history: false
+
+game-cmd:
+  pattern: '/game/{name}/cmd'
+  controller: Games
+  action: gameCmd
+  format: json
+  history: false

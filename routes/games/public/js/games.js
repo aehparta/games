@@ -20,4 +20,23 @@ $(document).ready(function() {
 			}, 1000);
 		});
 	});
+
+	$('body').on('click', '#game-cmd-send', function(e) {
+		e.preventDefault();
+		var url = $(this).attr('url');
+		var data = {
+			cmd: $('#game-cmd-input').val(),
+		};
+		if (data.cmd.length > 0) {
+			$.post(url, data, function(json) {
+				var data = JSON.parse(json);
+				if (data.data.length > 0) {
+					$('#game-cmd-output').html(data.data);
+					$('#game-cmd-output').show();
+				} else {
+					$('#game-cmd-output').hide();
+				}
+			});
+		}
+	});
 });

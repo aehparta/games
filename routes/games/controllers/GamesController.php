@@ -28,4 +28,15 @@ class GamesController extends \Core\Controller
         $game->setMap($map);
         return $this->render(null, $map);
     }
+
+    public function gameCmdAction($name)
+    {
+        $cmd = $this->input('cmd');
+        if (empty($cmd)) {
+            throw new \Exception400('missing cmd');
+        }
+        $game = \Games\Game::getGame($name);
+        $r = $game->send($cmd);
+        return $this->render(null, $r);
+    }
 }

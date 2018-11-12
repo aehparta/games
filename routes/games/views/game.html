@@ -5,6 +5,23 @@
   {{ game.getLabel() }}
 </h1>
 <h2>
+  Send command
+</h2>
+<form class="form-inline">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">
+        Command:
+      </div>
+      <input id="game-cmd-input" class="form-control"/>
+    </div>
+  </div>
+  <button id="game-cmd-send" class="btn btn-primary" url="{{ route('game-cmd', { name: game.getName() }) }}">
+    Send
+  </button>
+</form>
+<pre id="game-cmd-output" style="display: none;"></pre>
+<h2>
   Status
 </h2>
 <h3>
@@ -26,14 +43,14 @@
   </thead>
   <tbody>
     {% for player in game.getPlayers() %}
-      <tr>
-        <td>
-          {{ player.getName() }}
-        </td>
-        <td>
-          {{ player.getScore() }}
-        </td>
-      </tr>
+    <tr>
+      <td>
+        {{ player.getName() }}
+      </td>
+      <td>
+        {{ player.getScore() }}
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
@@ -42,7 +59,7 @@
 </h2>
 <div class="row">
   {% for map in game.getMaps() %}
-  <div class="col-md-2">
+  <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
     <button map-set="{{ route('game-map-set', { name: game.getName(), map: map }) }}" class="btn btn-default form-control game-map-set" map-get="{{ route('game-map-get', { name: game.getName() }) }}">
       {{ map }}
     </button>
