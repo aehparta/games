@@ -6,7 +6,7 @@ class Game extends \Core\Module
 {
     const LABEL = null;
 
-    private $rcon;
+    protected $rcon;
 
     public function __construct($host = null, $port = null, $password = null)
     {
@@ -86,9 +86,14 @@ class Game extends \Core\Module
         return null;
     }
 
-    public function send($command, $read = true)
+    public function send($command)
     {
-        return $this->rcon->send($command, $read);
+        return $this->rcon->send($command);
+    }
+
+    public function setTimeout($timeout = null)
+    {
+        $this->rcon->setTimeout($timeout);
     }
 
     public static function cmdGamesList()
@@ -109,6 +114,7 @@ class Game extends \Core\Module
             return false;
         }
         $game = new $class($options['host'], $options['port'], $options['password']);
+        $game->setTimeout($options['timeout']);
         $r    = $game->send($args['command']);
         if ($r) {
             echo $args['game'] . ':' . $args['command'] . ":\n" . $r . "\n";

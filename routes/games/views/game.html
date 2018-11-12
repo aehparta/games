@@ -43,9 +43,9 @@
 <div class="row">
   {% for map in game.getMaps() %}
   <div class="col-md-2">
-    <a href="{{ route('game-map', { name: game.getName(), map: map }) }}" class="btn btn-default form-control">
+    <button map-set="{{ route('game-map-set', { name: game.getName(), map: map }) }}" class="btn btn-default form-control game-map-set" map-get="{{ route('game-map-get', { name: game.getName() }) }}">
       {{ map }}
-    </a>
+    </button>
   </div>
   {% endfor %}
 </div>

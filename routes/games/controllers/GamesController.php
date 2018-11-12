@@ -16,10 +16,16 @@ class GamesController extends \Core\Controller
         return $this->render('game.html', $params);
     }
 
-    public function gameMapAction($name, $map)
+    public function gameMapGetAction($name)
+    {
+        $game = \Games\Game::getGame($name);
+        return $this->render(null, $game->getMap());
+    }
+
+    public function gameMapSetAction($name, $map)
     {
         $game = \Games\Game::getGame($name);
         $game->setMap($map);
-        throw new \RedirectException(\kernel::historyPop());
+        return $this->render(null, $map);
     }
 }

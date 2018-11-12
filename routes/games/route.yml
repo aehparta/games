@@ -8,7 +8,16 @@ game:
   controller: Games
   action: game
 
-game-map:
+game-map-get:
+  pattern: '/game/{name}/map'
+  controller: Games
+  action: gameMapGet
+  format: json
+  history: false
+
+game-map-set:
   pattern: '/game/{name}/map/{map}'
   controller: Games
-  action: gameMap
+  action: gameMapSet
+  format: json
+  history: false

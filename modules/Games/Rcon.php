@@ -32,9 +32,10 @@ class Rcon
     private $host;
     private $port;
     private $password;
-    private $timeout;
+    private $timeout = 0.1;
+    private $prefix;
 
-    private $socket;
+    private $socket = null;
     private $errno;
     private $errstr;
 
@@ -46,7 +47,7 @@ class Rcon
      * @param string $password The server RCON password
      * @param float  $timeout  An optional UDP socket timeout
      */
-    public function __construct($host, $port, $password, $timeout = 2)
+    public function __construct($host, $port, $password)
     {
         if (!$host || !$port) {
             throw new \Exception('trying to connect without specified host or port');
@@ -54,7 +55,7 @@ class Rcon
         $this->host     = $host;
         $this->port     = $port;
         $this->password = $password;
-        $this->timeout  = $timeout;
+        $this->prefix   = str_repeat(chr(255), 4) . 'rcon ' . $this->password . ' ';
     }
 
     /**
@@ -66,6 +67,10 @@ class Rcon
      */
     private function connect()
     {
+        if ($this->socket) {
+            return true;
+        }
+
         /* create the UDP socket where to send data */
         $this->socket = fsockopen("udp://{$this->host}",
             $this->port,
@@ -102,23 +107,30 @@ class Rcon
      * @throws Exception If the UDP socket has not been correctly initialized
      * @return The       server response as a string if it's valid otherwise NULL
      */
-    private function read()
+    private function read($raw = false)
     {
         if (is_null($this->socket)) {
             \kernel::log(LOG_ERR, 'could not read response: UDP socket is NULL');
             return false;
         }
 
-        stream_set_timeout($this->socket, 0, $this->timeout * 100000);
+        stream_set_timeout($this->socket, 0, $this->timeout * 1e6);
 
         $response = '';
-        while ($buffer = fread($this->socket, 4096)) {
-            list($header, $content) = explode("\n", $buffer, 2);
-            $response .= $content;
+        while ($buffer = fread($this->socket, 65536)) {
+            if (!$raw) {
+                list($header, $content) = explode("\n", $buffer, 2);
+                $response .= $content;
+            } else {
+                $response .= $buffer;
+            }
+        }
+
+        if ($raw) {
+            return $response;
         }
 
         $response = trim($response);
-
         if (empty($response)) {
             return null;
         }
@@ -134,42 +146,29 @@ class Rcon
      * @param  string    $command The command to be executed
      * @throws Exception If the UDP socket has not been initialized
      */
-    private function write($command)
+    private function write($command, $no_prefix = false)
     {
         if (is_null($this->socket)) {
             \kernel::log(LOG_ERR, 'could not send command ' . $command . ': UDP socket is NULL');
             return false;
         }
-        return fwrite($this->socket, str_repeat(chr(255), 4) . 'rcon ' . $this->password . ' ' . $command . "\n");
+        $data = ($no_prefix ? '' : $this->prefix) . $command . "\n";
+        return fwrite($this->socket, $data);
     }
 
     /**
-     * Send an RCON command. Will return the server response if
-     * specified in the method execution. Will return NULL if the server
-     * response is not valid or if we are not supposed to retrieve it
-     *
-     *         method execution or NULL if the server response is not valid or if
-     *         we are not supposed to retrieve it
-     * @param  string    $command The command to be executed
-     * @param  boolean   $read    Whether to return the server response or not (optional)
-     * @throws Exception If the command couldn't be sent to the server
-     * @return The       server response to the given RCON command if specified in the
+     * Send an RCON command.
      */
-    public function send($command, $read = true)
+    public function send($command, $no_prefix = false, $read_raw = false)
     {
         if (!$this->connect()) {
             return false;
         }
-        if (!$this->write($command)) {
+        if (!$this->write($command, $no_prefix)) {
             return false;
         }
 
-        if (!$read) {
-            $this->disconnect();
-            return null;
-        }
-
-        $res = $this->read();
+        $res = $this->read($read_raw);
         $this->disconnect();
 
         return $res;
@@ -189,4 +188,31 @@ class Rcon
         }
     }
 
+    /**
+     * Set custom prefix before command.
+     */
+    public function setPrefix($prefix)
+    {
+        $this->prefix = $prefix;
+    }
+
+    /**
+     * Get current password.
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set timeout.
+     */
+    public function setTimeout($timeout)
+    {
+        if (!$timeout) {
+            $this->timeout = 0.1;
+        } else {
+            $this->timeout = $timeout;
+        }
+    }
 }
