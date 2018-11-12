@@ -46,7 +46,7 @@ class CS extends \Games\Game
 
         $maps = array_keys($maps);
         sort($maps, SORT_NATURAL | SORT_FLAG_CASE);
-        
+
         return $maps;
     }
 
@@ -61,7 +61,16 @@ class CS extends \Games\Game
 
     public function setMap(string $map)
     {
-        return $this->send('map ' . $map);
+        return $this->send('changelevel ' . $map);
+    }
+
+    public function getPlayers()
+    {
+        $status = $this->fetchStatus();
+        if (isset($status['players'])) {
+            return $status['players'];
+        }
+        return array();
     }
 
     private function fetchStatus()
@@ -84,10 +93,13 @@ class CS extends \Games\Game
         self::$status['map'] = $map[1];
 
         /* parse players */
-        // foreach (array_slice($lines, 6) as $p) {
-        //     $p                   = preg_split('/[\s]+/', trim($p));
-        //     $status['players'][] = new Player($p[5]);
-        // }
+        foreach (array_slice($lines, 6) as $p) {
+            $p = preg_split('/[\s]+/', trim($p));
+            if (count($p) < 10) {
+                continue;
+            }
+            self::$status['players'][] = new Player(trim($p[2], '"'), $p[5]);
+        }
 
         return self::$status;
     }
