@@ -1,0 +1,11 @@
+game:
+  get:
+    values:
+      id:
+        method: getId
+      label:
+        method: getLabel
+      up:
+        method: isUp
+      map:
+        method: getMap

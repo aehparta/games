@@ -1,24 +1,26 @@
-modules:
-  Games\Game:
-    games:
-      - Quake2
-      - CS
-      - Cod2
-      - Cod4
-  Games\Quake2:
+
+games:
+  aq2:
     label: Action Quake
+    class: Games\Quake2
     host: dev.lan
     port: 27910
     password: jussi
-  Games\CS:
+  cs:
+    label: Counter-Strike 1.6
+    class: Games\CS
     host: dev.lan
     port: 27015
     password: jussi
-  Games\Cod2:
+  cod2:
+    label: 'Call of Duty 2'
+    class: Games\Cod2
     host: dev.lan
     port: 28961
     password: salaisuus
-  Games\Cod4:
+  cod4:
+    label: 'Call of Duty 4: Modern Warface'
+    class: Games\Cod4
     host: dev.lan
     port: 28960
     password: salaisuus

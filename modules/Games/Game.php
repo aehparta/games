@@ -4,16 +4,16 @@ namespace Games;
 
 class Game extends \Core\Module
 {
-    const LABEL = null;
-
+    protected $id;
     protected $rcon;
 
-    public function __construct($host = null, $port = null, $password = null)
+    public function __construct($id)
     {
         parent::__construct();
-        $host       = $host ? $host : $this->getModuleValue('host');
-        $port       = $port ? $port : $this->getModuleValue('port');
-        $password   = $password ? $password : $this->getModuleValue('password');
+        $this->id   = $id;
+        $host       = \kernel::getConfigValue('games', $id, 'host');
+        $port       = \kernel::getConfigValue('games', $id, 'port');
+        $password   = \kernel::getConfigValue('games', $id, 'password');
         $this->rcon = new \Games\Rcon($host, $port, $password);
     }
 
@@ -22,22 +22,18 @@ class Game extends \Core\Module
         return false;
     }
 
-    public function getName()
+    public function getId()
     {
-        $parts = explode('\\', get_class($this));
-        return $parts[1];
+        return $this->id;
     }
 
     public function getLabel()
     {
-        $label = $this->getModuleValue('label');
+        $label = \kernel::getConfigValue('games', $this->id, 'label');
         if ($label) {
             return $label;
         }
-        if (static::LABEL !== null) {
-            return static::LABEL;
-        }
-        return $this->getName();
+        return $this->getId();
     }
 
     public function getMaps()
@@ -67,24 +63,23 @@ class Game extends \Core\Module
 
     public static function getGames()
     {
-        $game_names = \kernel::getConfigValue('modules', get_class(), 'games');
-        if (!is_array($game_names)) {
-            $game_names = array();
+        $games_cfg = \kernel::getConfigValue('games');
+        if (!is_array($games_cfg)) {
+            return array();
         }
         $games = array();
-        foreach ($game_names as $game_name) {
-            $class = '\\Games\\' . $game_name;
-            if (class_exists($class)) {
-                $games[] = new $class();
+        foreach ($games_cfg as $id => $cfg) {
+            if (class_exists($cfg['class'])) {
+                $games[] = new $cfg['class']($id);
             }
         }
         return $games;
     }
 
-    public static function getGame($name)
+    public static function getGame($id)
     {
         foreach (self::getGames() as $game) {
-            if ($game->getName() === $name) {
+            if ($game->getId() === $id) {
                 return $game;
             }
         }
@@ -100,14 +95,14 @@ class Game extends \Core\Module
     {
         $r = $this->send($var);
         if (!$r) {
-            return false;
+            return null;
         }
         preg_match('/"([a-zA-Z0-9-_]+)"[\s]*is[:\s]*"([a-zA-Z0-9-_.,]+)"/', $r, $matches);
         if (count($matches) != 3) {
-            return false;
+            return null;
         }
         if ($matches[1] != $var) {
-            return false;
+            return null;
         }
         $v = trim($matches[2], ' "');
         return $v;
@@ -116,7 +111,7 @@ class Game extends \Core\Module
     public function setVar($var, $value)
     {
         $this->send($var . ' ' . $value);
-        if ($this->getModuleValue('vars', $var, 'restart') === true) {
+        if (\kernel::getConfigValue('games', $this->id, 'vars', $var, 'restart') === true) {
             $this->restart();
         }
     }
@@ -131,25 +126,7 @@ class Game extends \Core\Module
         $games = self::getGames();
         echo "Games:\n";
         foreach ($games as $game) {
-            echo ' - ' . $game->getName() . ': ' . $game->getLabel() . "\n";
-        }
-        return true;
-    }
-
-    public static function cmd($cmd, $args, $options)
-    {
-        $class = '\\Games\\' . $args['game'];
-        if (!class_exists($class)) {
-            \kernel::log(LOG_ERR, 'class for game ' . $args['game'] . ' does not exists');
-            return false;
-        }
-        $game = new $class($options['host'], $options['port'], $options['password']);
-        $game->setTimeout($options['timeout']);
-        $r = $game->send($args['command']);
-        if ($r) {
-            echo $args['game'] . ':' . $args['command'] . ":\n" . $r . "\n";
-        } else {
-            echo $args['game'] . ':' . $args['command'] . ':noresponse' . "\n";
+            echo ' - ' . str_pad($game->getId(), 8) . ': ' . $game->getLabel() . "\n";
         }
         return true;
     }

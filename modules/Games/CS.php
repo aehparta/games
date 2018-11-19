@@ -4,14 +4,12 @@ namespace Games;
 
 class CS extends \Games\Game
 {
-    const LABEL = 'Counter-Strike 1.6';
-
     private static $status = null;
     private static $challenge;
 
-    public function __construct($host = null, $port = null, $password = null)
+    public function __construct($id)
     {
-        parent::__construct($host, $port, $password);
+        parent::__construct($id);
         /* fetch challenge */
         $r = $this->rcon->send(str_repeat(chr(255), 4) . 'challenge rcon', true, true);
         preg_match('/^\xff\xff\xff\xffchallenge rcon ([0-9]+)/', $r, $matches);

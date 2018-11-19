@@ -24,7 +24,7 @@
         <i class="fa {% if game.isUp() %}text-success fa-check-circle{% else %}text-danger fa-minus-circle{% endif %} "></i>
       </td>
       <td>
-        <a href="{{ route('game', { name: game.getName() }) }}">{{ game.getLabel() }}</a>
+        <a href="{{ route('game', { name: game.getId() }) }}">{{ game.getLabel() }}</a>
       </td>
       <td>
         {{ game.getMap() }}

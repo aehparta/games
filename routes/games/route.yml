@@ -1,7 +1,3 @@
-index:
-  pattern: '/'
-  controller: Games
-  action: index
 
 game:
   pattern: '/game/{name}'
@@ -35,3 +31,24 @@ game-var:
   action: gameVar
   format: json
   history: false
+
+game-api-games-get:
+  pattern: '/games/{game_id?}'
+  controller: GamesApi
+  action: gamesGet
+  format: json
+  method: get
+  history: false
+
+game-api-vars:
+  pattern: '/games/{game_id}/vars/{var}'
+  controller: GamesApi
+  action: gameVarGet
+  format: json
+  method: get
+  history: false
+
+index:
+  pattern: '/'
+  controller: Games
+  action: index

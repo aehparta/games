@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8a660f944c80cd7a327b422064cc083",
+    "content-hash": "7145384001772a3aa75f98b75701a0ef",
     "packages": [
+        {
+            "name": "kehikko/api",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kehikko/API.git",
+                "reference": "b5c5d4c21a4474bab0d3f37c70095adb3977d561"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kehikko/API/zipball/b5c5d4c21a4474bab0d3f37c70095adb3977d561",
+                "reference": "b5c5d4c21a4474bab0d3f37c70095adb3977d561",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "API\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antti Partanen",
+                    "email": "aehparta@iki.fi"
+                }
+            ],
+            "description": "Kehikko framework API handler",
+            "time": "2018-01-25T12:16:40+00:00"
+        },
         {
             "name": "kehikko/composer",
             "version": "1.0.0",

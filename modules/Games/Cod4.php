@@ -4,8 +4,6 @@ namespace Games;
 
 class Cod4 extends \Games\Game
 {
-    const LABEL = 'Call of Duty 4: Modern Warfare';
-
     public function isUp()
     {
         return $this->fetchStatus() !== false;

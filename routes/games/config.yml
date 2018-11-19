@@ -3,3 +3,4 @@ css:
 
 javascript:
   - games.js
+  - https://cdn.jsdelivr.net/npm/vue
