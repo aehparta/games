@@ -60,6 +60,11 @@ class Game extends \Core\Module
         return array();
     }
 
+    public function restart()
+    {
+        return false;
+    }
+
     public static function getGames()
     {
         $game_names = \kernel::getConfigValue('modules', get_class(), 'games');
@@ -91,6 +96,31 @@ class Game extends \Core\Module
         return $this->rcon->send($command);
     }
 
+    public function getVar($var)
+    {
+        $r = $this->send($var);
+        if (!$r) {
+            return false;
+        }
+        preg_match('/"([a-zA-Z0-9-_]+)"[\s]*is[:\s]*"([a-zA-Z0-9-_.,]+)"/', $r, $matches);
+        if (count($matches) != 3) {
+            return false;
+        }
+        if ($matches[1] != $var) {
+            return false;
+        }
+        $v = trim($matches[2], ' "');
+        return $v;
+    }
+
+    public function setVar($var, $value)
+    {
+        $this->send($var . ' ' . $value);
+        if ($this->getModuleValue('vars', $var, 'restart') === true) {
+            $this->restart();
+        }
+    }
+
     public function setTimeout($timeout = null)
     {
         $this->rcon->setTimeout($timeout);
@@ -115,7 +145,7 @@ class Game extends \Core\Module
         }
         $game = new $class($options['host'], $options['port'], $options['password']);
         $game->setTimeout($options['timeout']);
-        $r    = $game->send($args['command']);
+        $r = $game->send($args['command']);
         if ($r) {
             echo $args['game'] . ':' . $args['command'] . ":\n" . $r . "\n";
         } else {

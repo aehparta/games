@@ -55,6 +55,11 @@ class Quake2 extends \Games\Game
         return array();
     }
 
+    public function restart()
+    {
+        return $this->setMap($this->getMap());
+    }
+
     private function fetchStatus()
     {
         static $status = null;

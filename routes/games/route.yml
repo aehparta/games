@@ -28,3 +28,10 @@ game-cmd:
   action: gameCmd
   format: json
   history: false
+
+game-var:
+  pattern: '/game/{name}/var/{var}'
+  controller: Games
+  action: gameVar
+  format: json
+  history: false

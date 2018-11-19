@@ -20,6 +20,7 @@ class CS extends \Games\Game
         } else {
             self::$status = false;
         }
+        $this->rcon->setResponseTrim('l');
     }
 
     public function isUp()
@@ -37,11 +38,12 @@ class CS extends \Games\Game
         }
 
         $maps = array();
-        foreach (explode("\n", $r) as $map) {
-            if (substr($map, -4) == '.bsp') {
-                $map = substr($map, 0, -4);
+        foreach (explode("\n", $r) as $line) {
+            $matches = array();
+            preg_match('/^([a-zA-Z0-9-_]+).bsp$/', $line, $matches);
+            if (isset($matches[1])) {
+                $maps[$matches[1]] = $matches[1];
             }
-            $maps[$map] = $map;
         }
 
         $maps = array_keys($maps);
@@ -89,11 +91,11 @@ class CS extends \Games\Game
         $lines        = explode("\n", $r);
 
         /* parse current map */
-        preg_match('/map[\s]*:[\s]*([^\s]+)/', $lines[2], $map);
+        preg_match('/map[\s]*:[\s]*([^\s]+)/', $lines[3], $map);
         self::$status['map'] = $map[1];
 
         /* parse players */
-        foreach (array_slice($lines, 6) as $p) {
+        foreach (array_slice($lines, 7) as $p) {
             $p = preg_split('/[\s]+/', trim($p));
             if (count($p) < 10) {
                 continue;

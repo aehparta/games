@@ -51,6 +51,11 @@ class Cod4 extends \Games\Game
         return $this->send('map ' . $map);
     }
 
+    public function restart()
+    {
+        return $this->send('map_restart');
+    }
+
     private function fetchStatus()
     {
         static $status = null;

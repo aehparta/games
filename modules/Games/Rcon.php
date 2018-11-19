@@ -35,6 +35,8 @@ class Rcon
     private $timeout = 0.1;
     private $prefix;
 
+    private $response_trim = 'print';
+
     private $socket = null;
     private $errno;
     private $errstr;
@@ -118,18 +120,18 @@ class Rcon
 
         $response = '';
         while ($buffer = fread($this->socket, 65536)) {
-            if (!$raw) {
-                list($header, $content) = explode("\n", $buffer, 2);
-                $response .= $content;
-            } else {
-                $response .= $buffer;
-            }
+            $response .= $buffer;
         }
 
         if ($raw) {
             return $response;
         }
 
+        $response = ltrim($response, "\xff");
+        $len = strlen($this->response_trim);
+        if (substr($response, 0, $len) == $this->response_trim) {
+            $response = substr($response, $len);
+        }
         $response = trim($response);
         if (empty($response)) {
             return null;
@@ -214,5 +216,13 @@ class Rcon
         } else {
             $this->timeout = $timeout;
         }
+    }
+
+    /**
+     * Remove given string after receiving data from start of data.
+     */
+    public function setResponseTrim($str)
+    {
+        $this->response_trim = $str;
     }
 }

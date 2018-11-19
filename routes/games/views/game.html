@@ -24,9 +24,57 @@
 <h2>
   Status
 </h2>
-<h3>
-  Current map: {{ game.getMap() }}
-</h3>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>
+        Variable
+      </th>
+      <th>
+        Value
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        map
+      </td>
+      <td>
+        {{ game.getMap() }}
+      </td>
+      <td>
+        current map
+      </td>
+    </tr>
+    {% for var, data in game.getModuleValue('vars') %}
+    <tr>
+      <td>
+        {{ data.label ? data.label : var }}
+      </td>
+      <td>
+        {% if data.options %}
+          <select class="game-var-select" var-url="{{ route('game-var', { name: game.getName(), var: var }) }}">
+          {% for opt in data.options %}
+            <option value="{{ opt }}" {{ opt == game.getVar(var) ? 'selected' : '' }}>
+              {{ opt }}
+            </option>
+          {% endfor %}
+          </select>
+        {% else %}
+          {{ game.getVar(var) }}
+        {% endif %}
+      </td>
+      <td>
+        {{ data.description }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 <h3>
   Players
 </h3>
