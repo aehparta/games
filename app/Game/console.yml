@@ -1,0 +1,55 @@
+commands:
+  rcon:cmd:
+    description: send rcon command to remote server
+    class: \Games\Rcon
+    method: cmd
+    arguments:
+      host:
+        description: host
+      port:
+        description: port
+      password:
+        description: password
+      command:
+        description: command to send
+  cmd:
+    description: do game stuff
+    class: \Games\Game
+    method: cmd
+    arguments:
+      game:
+        description: game name
+      command:
+        description: command to send
+    options:
+      host:
+        short_name: -h
+        long_name: --host
+        description: host
+      port:
+        short_name: -P
+        long_name: --port
+        description: port
+      password:
+        short_name: -p
+        long_name: --password
+        description: password
+      timeout:
+        short_name: -t
+        long_name: --timeout
+        description: timeout for query in seconds (default 0.1)
+  list:
+    description: list enabled games
+    class: \Games\Game
+    method: cmdGamesList
+  quake2:test:
+    description: send rcon command to remote server
+    class: \Games\Quake2
+    method: test
+    arguments:
+      host:
+        description: host
+      port:
+        description: port
+      password:
+        description: password

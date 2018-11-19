@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Game;
+
+class Player
+{
+    private $name;
+    private $score;
+
+    public function __construct($name, $score = 0)
+    {
+        $this->name  = $name;
+        $this->score = $score;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getScore()
+    {
+        return $this->score;
+    }
+}
