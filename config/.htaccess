@@ -1,3 +1,0 @@
-# Do not allow browser any access to configuration directory.
-Deny from all
-
