@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "kehikko/api",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/API.git",
-                "reference": "b5c5d4c21a4474bab0d3f37c70095adb3977d561"
+                "reference": "b28c49ae94a5bf40eaddaec65d45efe957fb2037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kehikko/API/zipball/b5c5d4c21a4474bab0d3f37c70095adb3977d561",
-                "reference": "b5c5d4c21a4474bab0d3f37c70095adb3977d561",
+                "url": "https://api.github.com/repos/kehikko/API/zipball/b28c49ae94a5bf40eaddaec65d45efe957fb2037",
+                "reference": "b28c49ae94a5bf40eaddaec65d45efe957fb2037",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 }
             ],
             "description": "Kehikko framework API handler",
-            "time": "2018-01-25T12:16:40+00:00"
+            "time": "2018-09-19T12:53:29+00:00"
         },
         {
             "name": "kehikko/composer",

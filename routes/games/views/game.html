@@ -49,7 +49,11 @@
           map
         </td>
         <td>
-          {{ game.map }}
+          <select v-model="game.map" v-on:change="setMap" class="game-var-select">
+            <option v-for="map in maps" v-bind:value="map">
+              {{ map }}
+            </option>
+          </select>
         </td>
         <td>
           current map
@@ -60,8 +64,8 @@
           {{ v.label }}
         </td>
         <td>
-          <select v-if="v.options" class="game-var-select">
-            <option v-for="opt in v.options" value="{{ opt }}">
+          <select :name="v.id" v-if="v.options" v-model="v.value" v-on:change="setVar" class="game-var-select">
+            <option v-for="opt in v.options" v-bind:value="opt">
               {{ opt }}
             </option>
           </select>
@@ -75,41 +79,31 @@
       </tr>
     </tbody>
   </table>
-  <!--  <h3>
-      Players
-    </h3>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>
-            Player
-          </th>
-          <th>
-            Score
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            {{ player.getName() }}
-          </td>
-          <td>
-            {{ player.getScore() }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>
-      Maps
-    </h2>
-    <div class="row">
-      <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
-        <button map-set="{{ route('game-map-set', { name: game.getName(), map: map }) }}" class="btn btn-default form-control game-map-set" map-get="{{ route('game-map-get', { name: game.getName() }) }}">
-          {{ map }}
-        </button>
-      </div>
-    </div> -->
+  <h3>
+    Players
+  </h3>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>
+          Player
+        </th>
+        <th>
+          Score
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="player in players">
+        <td>
+          {{ player.name }}
+        </td>
+        <td>
+          {{ player.score }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 {% endverbatim %}
 {% endblock content %}

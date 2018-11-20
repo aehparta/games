@@ -76,6 +76,67 @@ class Game extends \Core\Module
         return false;
     }
 
+    public function send($command)
+    {
+        return $this->rcon->send($command);
+    }
+
+    public function getVar($var_id)
+    {
+        $var = \kernel::getConfigValue('games', $this->id, 'vars', $var_id);
+        if (!$var) {
+            return null;
+        }
+        $var['value'] = $this->getVarValue($var_id);
+        return $var;
+    }
+
+    public function getVarValue($var_id)
+    {
+        $r = $this->send($var_id);
+        if (!$r) {
+            return null;
+        }
+        preg_match('/"([a-zA-Z0-9-_]+)"[\s]*is[:\s]*"([a-zA-Z0-9-_., ]+)"/', $r, $matches);
+        if (count($matches) != 3) {
+            return null;
+        }
+        if ($matches[1] != $var_id) {
+            return null;
+        }
+        $v = trim($matches[2], ' "');
+        return $v;
+    }
+
+    public function setVarValue($var_id, $value)
+    {
+        $this->send($var_id . ' ' . $value);
+        if (\kernel::getConfigValue('games', $this->id, 'vars', $var_id, 'restart') === true) {
+            $this->restart();
+        }
+    }
+
+    public function getVars()
+    {
+        $vars = \kernel::getConfigValue('games', $this->id, 'vars');
+        if (!$vars) {
+            return array();
+        }
+        foreach ($vars as $key => &$var) {
+            $var['id']    = $key;
+            $var['value'] = $this->getVarValue($key);
+            if (!isset($var['label'])) {
+                $var['label'] = $key;
+            }
+        }
+        return array_values($vars);
+    }
+
+    public function setTimeout($timeout = null)
+    {
+        $this->rcon->setTimeout($timeout);
+    }
+
     public static function getGames()
     {
         $games_cfg = \kernel::getConfigValue('games');
@@ -101,47 +162,26 @@ class Game extends \Core\Module
         return null;
     }
 
-    public function send($command)
-    {
-        return $this->rcon->send($command);
-    }
-
-    public function getVar($var)
-    {
-        $r = $this->send($var);
-        if (!$r) {
-            return null;
-        }
-        preg_match('/"([a-zA-Z0-9-_]+)"[\s]*is[:\s]*"([a-zA-Z0-9-_.,]+)"/', $r, $matches);
-        if (count($matches) != 3) {
-            return null;
-        }
-        if ($matches[1] != $var) {
-            return null;
-        }
-        $v = trim($matches[2], ' "');
-        return $v;
-    }
-
-    public function setVar($var, $value)
-    {
-        $this->send($var . ' ' . $value);
-        if (\kernel::getConfigValue('games', $this->id, 'vars', $var, 'restart') === true) {
-            $this->restart();
-        }
-    }
-
-    public function setTimeout($timeout = null)
-    {
-        $this->rcon->setTimeout($timeout);
-    }
-
     public static function cmdGamesList()
     {
         $games = self::getGames();
         echo "Games:\n";
         foreach ($games as $game) {
             echo ' - ' . str_pad($game->getId(), 8) . ': ' . $game->getLabel() . ' (' . $game->getHost() . ':' . $game->getPort() . ")\n";
+        }
+        return true;
+    }
+
+    public static function cmd($cmd, $args, $options)
+    {
+        $game = self::getGame($args['game']);
+        $game->setTimeout($options['timeout']);
+        $r    = $game->send($args['command']);
+        if ($r) {
+            echo $game->getId() . ':' . $game->getLabel() . ':response:' . "\n";
+            echo $r . "\n";
+        } else {
+            echo $game->getId() . ':' . $game->getLabel() . ':response: No response' . "\n";
         }
         return true;
     }

@@ -15,7 +15,7 @@ if ($('#games').length) {
 						app.games.push(e);
 					});
 				});
-				setTimeout(this.refresh, 2000);
+				setTimeout(this.refresh, 5000);
 			},
 		}
 	});
@@ -26,10 +26,13 @@ if ($('#games').length) {
 			id: null,
 			game: {},
 			vars: [],
+			maps: [],
+			players: [],
 			cmd: {
 				input: '',
 				output: null
 			},
+			timer: null,
 		},
 		created: function() {
 			this.id = window.location.pathname.replace(/\//g, '');
@@ -40,7 +43,26 @@ if ($('#games').length) {
 				api.games.read(this.id).done(function(data) {
 					app.game = Object.assign({}, app.game, data.data);
 				});
-				setTimeout(this.refresh, 2000);
+				if (this.maps.length < 1) {
+					api.games.maps.read(this.id).done(function(data) {
+						app.maps = Object.assign({}, app.maps, data.data);
+					});
+				}
+				api.games.players.read(this.id).done(function(data) {
+					data.data.sort(function(a, b) {
+						if (a.score > b.score) {
+							return -1;
+						} else if (a.score < b.score) {
+							return 1;
+						}
+						return 0;
+					});
+					app.players = Object.assign({}, data.data);
+				});
+				api.games.vars.read(this.id).done(function(data) {
+					app.vars = Object.assign({}, app.vars, data.data);
+				});
+				this.timer = setTimeout(this.refresh, 5000);
 			},
 			sendCommand: function() {
 				app.cmd.output = null;
@@ -48,6 +70,20 @@ if ($('#games').length) {
 					cmd: this.cmd.input
 				}).done(function(data) {
 					app.cmd.output = data.data;
+				});
+			},
+			setVar: function(e) {
+				clearTimeout(this.timer);
+				api.games.vars.update(this.id, e.target.name, {
+					value: e.target.value
+				}).done(function() {
+					app.refresh();
+				});
+			},
+			setMap: function(e) {
+				clearTimeout(this.timer);
+				api.games.map.update(this.id, e.target.value).done(function() {
+					app.refresh();
 				});
 			},
 		}

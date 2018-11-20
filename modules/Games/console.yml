@@ -16,3 +16,17 @@ commands:
     description: list enabled games
     class: \Games\Game
     method: cmdGamesList
+  cmd:
+    description: send rcon command to specified game server
+    class: \Games\Game
+    method: cmd
+    arguments:
+      game:
+        description: game id
+      command:
+        description: command to send
+    options:
+      timeout:
+        short_name: -t
+        long_name: --timeout
+        description: query timeout

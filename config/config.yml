@@ -1,5 +1,8 @@
 setup:
   debug: true
+  formats:
+    - html
+    - json
 
 # twig setup
 twig:

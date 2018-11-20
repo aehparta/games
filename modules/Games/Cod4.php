@@ -4,6 +4,12 @@ namespace Games;
 
 class Cod4 extends \Games\Game
 {
+    public function getLabel()
+    {
+        $status = $this->fetchStatus();
+        return isset($status['hostname']) ? $status['hostname'] : parent::getLabel();
+    }
+
     public function isUp()
     {
         return $this->fetchStatus() !== false;
@@ -49,6 +55,15 @@ class Cod4 extends \Games\Game
         return $this->send('map ' . $map);
     }
 
+    public function getPlayers()
+    {
+        $status = $this->fetchStatus();
+        if (isset($status['players'])) {
+            return $status['players'];
+        }
+        return array();
+    }
+
     public function restart()
     {
         return $this->send('map_restart');
@@ -72,14 +87,22 @@ class Cod4 extends \Games\Game
             return false;
         }
 
+        /* parse hostname */
+        preg_match('/[\s]*hostname[\s]*:[\s]*([^\n]+)/', $lines[0], $hostname);
+        $status['hostname'] = trim($hostname[1]);
+
         /* parse current map */
         preg_match('/map[\s]*:[\s]*([^\n]+)/', $lines[5], $map);
         $status['map'] = $map[1];
 
         /* parse players */
         foreach (array_slice($lines, 9) as $p) {
-            $p                   = preg_split('/[\s]+/', trim($p));
-            $status['players'][] = new Player($p[5]);
+            $matches = array();
+            preg_match('/[0-9]+[\s]+([0-9]+)[\s]+[0-9]+[\s]+[0-9]+[\s]+[0-9]+[\s]+(.{32})/', trim($p), $matches);
+            if (count($matches) != 3) {
+                continue;
+            }
+            $status['players'][] = new Player(trim($matches[2]), intval($matches[1]));
         }
 
         return $status;

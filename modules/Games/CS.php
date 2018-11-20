@@ -21,6 +21,12 @@ class CS extends \Games\Game
         $this->rcon->setResponseTrim('l');
     }
 
+    public function getLabel()
+    {
+        $hostname = $this->getVarValue('hostname');
+        return $hostname ? $hostname : parent::getLabel();
+    }
+
     public function isUp()
     {
         return $this->fetchStatus() !== false;
@@ -94,11 +100,12 @@ class CS extends \Games\Game
 
         /* parse players */
         foreach (array_slice($lines, 7) as $p) {
-            $p = preg_split('/[\s]+/', trim($p));
-            if (count($p) < 10) {
+            $matches = array();
+            preg_match('/[#0-9\s]+"([^"]+)"[\s]+[0-9]+[\s]+[^\s]+[\s]+([0-9]+)/', trim($p), $matches);
+            if (count($matches) != 3) {
                 continue;
             }
-            self::$status['players'][] = new Player(trim($p[2], '"'), $p[5]);
+            self::$status['players'][] = new Player($matches[1], $matches[2]);
         }
 
         return self::$status;

@@ -18,3 +18,22 @@ game-cmd:
       cmd:
         type: string
         required: true
+
+game-var:
+  put:
+    values:
+      value:
+        type: string
+        required: false
+        method: setVarValue
+        parameters:
+          - var-id
+
+game-players:
+  get:
+    values:
+      name:
+        method: getName
+      score:
+        method: getScore
+        

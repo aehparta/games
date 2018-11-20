@@ -4,7 +4,11 @@ namespace Games;
 
 class Quake2 extends \Games\Game
 {
-    const LABEL = 'Quake 2';
+    public function getLabel()
+    {
+        $hostname = $this->getVarValue('hostname');
+        return $hostname ? $hostname : parent::getLabel();
+    }
 
     public function isUp()
     {

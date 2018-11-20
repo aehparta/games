@@ -3,24 +3,48 @@ games:
   aq:
     label: Action Quake
     class: Games\Quake2
-    host: lanit.lan
+    host: dev.lan
     port: 27910
     password: salaisuus
+    vars:
+      teamplay:
+        description: Enable teamplay
+        options: [ 0, 1 ]
+        restart: true
+      dmflags:
+        description: Somewhat crypted server flags
   cs:
     label: Counter-Strike 1.6
     class: Games\CS
-    host: lanit.lan
+    host: desktop.lan
     port: 27015
     password: salaisuus
+    vars:
+      mp_friendlyfire:
+        description: Enable or disable friendly fire
+        options: [ 0, 1 ]
+        restart: true
+      mp_forcechasecam:
+        description: Spectator mode, 0 = anyone, 1 = team and no free look, 2 = first person only, 3 = team and free look
+        options: [ 0, 1, 2, 3 ]
+      mp_freezetime:
+        description: Freeze seconds at round start
+        options: [ 0, 3, 6, 10 ]
+      mp_roundtime:
+        description: Minutes for a single round to last
+        options: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
+      sv_restart:
+        description: Restart server after setting this timeout (seconds)
+        options: [ 10, 5, 1 ]
   cod2:
     label: 'Call of Duty 2'
     class: Games\Cod2
-    host: lanit.lan
+    host: dev.lan
     port: 28961
     password: salaisuus
   cod4:
     label: 'Call of Duty 4: Modern Warface'
     class: Games\Cod4
-    host: lanit.lan
+    host: dev.lan
     port: 28960
     password: salaisuus

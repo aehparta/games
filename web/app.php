@@ -1,7 +1,7 @@
 <?php
 
 error_reporting(E_ALL | E_STRICT);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -9,6 +9,10 @@ $kernel = kernel::getInstance();
 
 try {
     $controller = $kernel->load(__DIR__ . '/../config/');
+    if ($kernel->debug()) {
+        error_reporting(E_ALL | E_STRICT);
+        ini_set('display_errors', 1);
+    }
     $kernel->render($controller);
     /* append to history */
     $kernel->historyAppend($_SERVER['REQUEST_URI']);
@@ -17,27 +21,16 @@ try {
     http_response_code($e->getCode());
     header('Location: ' . $e->getMessage());
     exit;
-} catch (Exception403 $e) {
-    if ($kernel->format == 'json') {
-        $ret = array(
-            'success' => false,
-            'msg'     => $e->getMessage(),
-        );
-        http_response_code(403);
-        echo json_encode($ret);
-    } else {
-        /* append to history */
-        $kernel->historyAppend($_SERVER['REQUEST_URI']);
-        /* do redirect to login */
-        http_response_code(302);
-        header('Location: ' . $kernel->config['urls']['login']);
-    }
-    exit;
 } catch (Exception $e) {
     $code = $e->getCode();
     if ($code < 100) {
         $code = 500;
     }
+    /* if not in debug mode, print server side errors to log */
+    if (!$kernel->getConfigValue('setup', 'debug') && $code >= 500) {
+        $kernel->log(LOG_ERR, 'Exception (' . $code . '): ' . $e->getMessage());
+    }
+    /* exception in the format requested */
     if ($kernel->format == 'json') {
         json_exception($e, $code);
     } else {
