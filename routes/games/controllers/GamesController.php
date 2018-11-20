@@ -2,7 +2,7 @@
 
 class GamesController extends \Core\Controller
 {
-    public function indexAction()
+    public function indexAction($path = null)
     {
         $params          = array();
         $params['games'] = \Games\Game::getGames();

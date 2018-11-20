@@ -33,7 +33,7 @@ game-var:
   history: false
 
 game-api-games-get:
-  pattern: '/games/{game_id?}'
+  pattern: '/api/games/{game_id?}'
   controller: GamesApi
   action: gamesGet
   format: json
@@ -41,14 +41,24 @@ game-api-games-get:
   history: false
 
 game-api-vars:
-  pattern: '/games/{game_id}/vars/{var}'
+  pattern: '/api/games/{game_id}/vars/{var}'
   controller: GamesApi
   action: gameVarGet
   format: json
   method: get
   history: false
 
+index_old:
+  pattern: '/index_old'
+  controller: Games
+  action: index
+
 index:
   pattern: '/'
+  controller: Games
+  action: index
+
+index_rest:
+  pattern: '/{path|rest}'
   controller: Games
   action: index
