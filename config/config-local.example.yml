@@ -3,24 +3,24 @@ games:
   aq2:
     label: Action Quake
     class: Games\Quake2
-    host: dev.lan
+    host: lanit.lan
     port: 27910
-    password: jussi
+    password: salaisuus
   cs:
     label: Counter-Strike 1.6
     class: Games\CS
-    host: dev.lan
+    host: lanit.lan
     port: 27015
-    password: jussi
+    password: salaisuus
   cod2:
     label: 'Call of Duty 2'
     class: Games\Cod2
-    host: dev.lan
+    host: lanit.lan
     port: 28961
     password: salaisuus
   cod4:
     label: 'Call of Duty 4: Modern Warface'
     class: Games\Cod4
-    host: dev.lan
+    host: lanit.lan
     port: 28960
     password: salaisuus

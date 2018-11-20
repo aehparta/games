@@ -68,6 +68,9 @@ class Cod4 extends \Games\Game
 
         $status = array('map' => null, 'players' => array());
         $lines  = explode("\n", $r);
+        if (count($lines) < 6) {
+            return false;
+        }
 
         /* parse current map */
         preg_match('/map[\s]*:[\s]*([^\n]+)/', $lines[5], $map);

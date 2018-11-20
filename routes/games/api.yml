@@ -9,3 +9,12 @@ game:
         method: isUp
       map:
         method: getMap
+      players:
+        method: getPlayerCount
+
+game-cmd:
+  put:
+    values:
+      cmd:
+        type: string
+        required: true

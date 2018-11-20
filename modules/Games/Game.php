@@ -17,6 +17,16 @@ class Game extends \Core\Module
         $this->rcon = new \Games\Rcon($host, $port, $password);
     }
 
+    public function getHost()
+    {
+        return $this->rcon->getHost();
+    }
+
+    public function getPort()
+    {
+        return $this->rcon->getPort();
+    }
+
     public function isUp()
     {
         return false;
@@ -54,6 +64,11 @@ class Game extends \Core\Module
     public function getPlayers()
     {
         return array();
+    }
+
+    public function getPlayerCount()
+    {
+        return count($this->getPlayers());
     }
 
     public function restart()
@@ -126,7 +141,7 @@ class Game extends \Core\Module
         $games = self::getGames();
         echo "Games:\n";
         foreach ($games as $game) {
-            echo ' - ' . str_pad($game->getId(), 8) . ': ' . $game->getLabel() . "\n";
+            echo ' - ' . str_pad($game->getId(), 8) . ': ' . $game->getLabel() . ' (' . $game->getHost() . ':' . $game->getPort() . ")\n";
         }
         return true;
     }

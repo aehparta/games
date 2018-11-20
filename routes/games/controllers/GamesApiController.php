@@ -20,4 +20,13 @@ class GamesApiController extends \Core\Controller
         return $this->render(null, $game->getVar($var));
     }
 
+    public function gameCmdAction($game_id)
+    {
+        $api  = new \API\API($this);
+        $data = $api->parse('game-cmd');
+        $game = \Games\Game::getGame($game_id);
+        $r    = $game->send($data['cmd']);
+        return $this->render(null, $r);
+    }
+
 }

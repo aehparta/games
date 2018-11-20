@@ -190,12 +190,14 @@ class Rcon
         }
     }
 
-    /**
-     * Set custom prefix before command.
-     */
-    public function setPrefix($prefix)
+    public function getHost()
     {
-        $this->prefix = $prefix;
+        return $this->host;
+    }
+
+    public function getPort()
+    {
+        return $this->port;
     }
 
     /**
@@ -204,6 +206,14 @@ class Rcon
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set custom prefix before command.
+     */
+    public function setPrefix($prefix)
+    {
+        $this->prefix = $prefix;
     }
 
     /**

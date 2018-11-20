@@ -4,16 +4,12 @@ class GamesController extends \Core\Controller
 {
     public function indexAction($path = null)
     {
-        $params          = array();
-        $params['games'] = \Games\Game::getGames();
-        return $this->render('index.html', $params);
+        return $this->render('index.html');
     }
 
-    public function gameAction($name)
+    public function gameAction($game_id)
     {
-        $params         = array();
-        $params['game'] = \Games\Game::getGame($name);
-        return $this->render('game.html', $params);
+        return $this->render('game.html');
     }
 
     public function gameMapGetAction($name)
@@ -27,17 +23,6 @@ class GamesController extends \Core\Controller
         $game = \Games\Game::getGame($name);
         $game->setMap($map);
         return $this->render(null, $map);
-    }
-
-    public function gameCmdAction($name)
-    {
-        $cmd = $this->input('cmd');
-        if ($cmd === null) {
-            throw new \Exception400('missing cmd');
-        }
-        $game = \Games\Game::getGame($name);
-        $r    = $game->send($cmd);
-        return $this->render(null, $r);
     }
 
     public function gameVarAction($name, $var)

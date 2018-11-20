@@ -1,37 +1,4 @@
 
-game:
-  pattern: '/game/{name}'
-  controller: Games
-  action: game
-
-game-map-get:
-  pattern: '/game/{name}/map'
-  controller: Games
-  action: gameMapGet
-  format: json
-  history: false
-
-game-map-set:
-  pattern: '/game/{name}/map/{map}'
-  controller: Games
-  action: gameMapSet
-  format: json
-  history: false
-
-game-cmd:
-  pattern: '/game/{name}/cmd'
-  controller: Games
-  action: gameCmd
-  format: json
-  history: false
-
-game-var:
-  pattern: '/game/{name}/var/{var}'
-  controller: Games
-  action: gameVar
-  format: json
-  history: false
-
 game-api-games-get:
   pattern: '/api/games/{game_id?}'
   controller: GamesApi
@@ -48,17 +15,20 @@ game-api-vars:
   method: get
   history: false
 
-index_old:
-  pattern: '/index_old'
-  controller: Games
-  action: index
+game-api-cmd:
+  pattern: '/api/games/{game_id}/cmd'
+  controller: GamesApi
+  action: gameCmd
+  format: json
+  method: post
+  history: false
 
 index:
   pattern: '/'
   controller: Games
   action: index
 
-index_rest:
-  pattern: '/{path|rest}'
+game:
+  pattern: '/{game_id}'
   controller: Games
-  action: index
+  action: game

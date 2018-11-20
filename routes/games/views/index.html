@@ -22,10 +22,11 @@
     <tbody>
       <tr v-for="game in games">
         <td>
-          <i class="fa fa-check-circle text-success"></i>
+          <i v-if="game.up" class="fa fa-check-circle text-success"></i>
+          <i v-else class="fa fa-plug text-danger"></i>
         </td>
         <td>
-          <a href="{{ game.id }}">
+          <a v-bind:href="game.id">
             {{ game.label }}
           </a>
         </td>
@@ -33,7 +34,7 @@
           {{ game.map }}
         </td>
         <td>
-          0
+          {{ game.players }}
         </td>
       </tr>
     </tbody>
