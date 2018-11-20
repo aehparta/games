@@ -1,6 +1,6 @@
 
 games:
-  aq2:
+  aq:
     label: Action Quake
     class: Games\Quake2
     host: lanit.lan

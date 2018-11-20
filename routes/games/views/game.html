@@ -16,7 +16,7 @@
         <div class="input-group-addon">
           Command:
         </div>
-        <input v-model.trim="cmd.input" class="form-control"/>
+        <input v-model.trim="cmd.input" v-on:keyup.enter="sendCommand" class="form-control"/>
       </div>
     </div>
     <button v-on:click="sendCommand" class="btn btn-primary">

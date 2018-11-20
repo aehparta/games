@@ -74,9 +74,17 @@ class Quake2 extends \Games\Game
 
         $status = array('map' => null, 'players' => array());
         $lines  = explode("\n", $r);
+        if (count($lines) < 1) {
+            $status = false;
+            return false;
+        }
 
         /* parse current map */
         preg_match('/map[\s]*:[\s]*([^\n]+)/', $lines[0], $map);
+        if (count($map) < 2) {
+            $status = false;
+            return false;
+        }
         $status['map'] = $map[1];
 
         /* parse players */

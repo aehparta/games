@@ -74,7 +74,7 @@ class Rcon
         }
 
         /* create the UDP socket where to send data */
-        $this->socket = fsockopen("udp://{$this->host}",
+        $this->socket = @fsockopen("udp://{$this->host}",
             $this->port,
             $this->errno,
             $this->errstr,
