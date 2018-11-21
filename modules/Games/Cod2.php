@@ -4,6 +4,14 @@ namespace Games;
 
 class Cod2 extends \Games\Game
 {
+    public function getLabel()
+    {
+        $this->setTimeout(0.5);
+        $hostname = $this->getVarValue('sv_hostname');
+        $this->setTimeout();
+        return $hostname ? $hostname : parent::getLabel();
+    }
+
     public function isUp()
     {
         return $this->fetchStatus() !== false;

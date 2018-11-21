@@ -15,12 +15,12 @@
   {
     "twig/twig": "^2.0",
     "symfony/yaml": "^3.2",
-    "phpFastCache/phpFastCache": "^4.3",
     "mtdowling/cron-expression": "^1.1",
     "pear/console_commandline": "^1.2",
-    "kehikko/kernel": "1.*",
-    "kehikko/core": "1.*",
+    "kehikko/kernel": "dev-master",
+    "kehikko/core": "dev-master",
     "kehikko/route-common": "^1.1",
-    "kehikko/api": "^1.1"
+    "kehikko/api": "^1.1",
+    "phpfastcache/phpfastcache": "^7.0"
   }
 }

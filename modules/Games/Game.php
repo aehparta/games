@@ -93,6 +93,10 @@ class Game extends \Core\Module
 
     public function getVarValue($var_id)
     {
+        $v = $this->cacheGet($this->id . ':var:' . $var_id);
+        if ($v !== null) {
+            return $v;
+        }
         $r = $this->send($var_id);
         if (!$r) {
             return null;
@@ -105,6 +109,7 @@ class Game extends \Core\Module
             return null;
         }
         $v = trim($matches[2], ' "');
+        $this->cacheSet($this->id . ':var:' . $var_id, $v, 30);
         return $v;
     }
 
@@ -114,6 +119,8 @@ class Game extends \Core\Module
         if (\kernel::getConfigValue('games', $this->id, 'vars', $var_id, 'restart') === true) {
             $this->restart();
         }
+        $this->cacheSet($this->id . ':var:' . $var_id, null, 0);
+
     }
 
     public function getVars()
@@ -176,7 +183,7 @@ class Game extends \Core\Module
     {
         $game = self::getGame($args['game']);
         $game->setTimeout($options['timeout']);
-        $r    = $game->send($args['command']);
+        $r = $game->send($args['command']);
         if ($r) {
             echo $game->getId() . ':' . $game->getLabel() . ':response:' . "\n";
             echo $r . "\n";

@@ -23,8 +23,8 @@ class CS extends \Games\Game
 
     public function getLabel()
     {
-        $hostname = $this->getVarValue('hostname');
-        return $hostname ? $hostname : parent::getLabel();
+        $status = $this->fetchStatus();
+        return isset(self::$status['hostname']) ? self::$status['hostname'] : parent::getLabel();
     }
 
     public function isUp()
@@ -34,7 +34,12 @@ class CS extends \Games\Game
 
     public function getMaps()
     {
-        $this->setTimeout(1.0);
+        $maps = $this->cacheGet($this->id . ':maps');
+        if ($maps) {
+            return $maps;
+        }
+
+        $this->setTimeout(2.0);
         $r = $this->send('maps *');
         $this->setTimeout();
         if (!$r) {
@@ -52,6 +57,7 @@ class CS extends \Games\Game
 
         $maps = array_keys($maps);
         sort($maps, SORT_NATURAL | SORT_FLAG_CASE);
+        $this->cacheSet($this->id . ':maps', $maps);
 
         return $maps;
     }
@@ -91,8 +97,12 @@ class CS extends \Games\Game
             return false;
         }
 
-        self::$status = array('map' => null, 'players' => array());
+        self::$status = array('hostname' => null, 'map' => null, 'players' => array());
         $lines        = explode("\n", $r);
+
+        /* parse hostname */
+        preg_match('/[\s]*hostname[\s]*:[\s]*([^\n]+)/', $lines[0], $hostname);
+        self::$status['hostname'] = trim($hostname[1]);
 
         /* parse current map */
         preg_match('/map[\s]*:[\s]*([^\s]+)/', $lines[3], $map);

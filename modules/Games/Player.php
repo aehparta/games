@@ -10,7 +10,7 @@ class Player
     public function __construct($name, $score = 0)
     {
         $this->name  = $name;
-        $this->score = $score;
+        $this->score = intval($score);
     }
 
     public function getName()

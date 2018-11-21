@@ -94,7 +94,7 @@ class Quake2 extends \Games\Game
         /* parse players */
         foreach (array_slice($lines, 3) as $p) {
             $p                   = preg_split('/[\s]+/', trim($p));
-            $status['players'][] = new Player($p[3], intval($p[1]));
+            $status['players'][] = new Player($p[3], $p[1]);
         }
 
         return $status;

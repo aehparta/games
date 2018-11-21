@@ -81,7 +81,7 @@ class Cod4 extends \Games\Game
             return false;
         }
 
-        $status = array('map' => null, 'players' => array());
+        $status = array('hostname' => null, 'map' => null, 'players' => array());
         $lines  = explode("\n", $r);
         if (count($lines) < 6) {
             return false;
