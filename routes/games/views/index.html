@@ -17,6 +17,12 @@
         <th>
           Players
         </th>
+        <th>
+          Host
+        </th>
+        <th>
+          Port
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -28,9 +34,6 @@
         <td>
           <a v-bind:href="game.id">
             {{ game.label }}
-            <span class="badge">
-              {{ game.host }}
-            </span>
           </a>
         </td>
         <td>
@@ -38,6 +41,12 @@
         </td>
         <td>
           {{ game.players }}
+        </td>
+        <td>
+          {{ game.host }}
+        </td>
+        <td>
+          {{ game.port }}
         </td>
       </tr>
     </tbody>

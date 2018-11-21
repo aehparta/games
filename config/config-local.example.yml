@@ -4,6 +4,8 @@ paths:
 
 cache:
   type: phpfastcache
+  config:
+    path: '{path:tmp}'
 
 games:
   aq:

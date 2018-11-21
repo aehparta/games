@@ -7,6 +7,12 @@
     <i v-else class="fa fa-plug text-danger"></i>
     {{ game.label }}
   </h1>
+  <h4 v-if="game.up" class="text-info">
+    host: {{ game.host }}
+  </h4>
+  <h4 v-if="game.up" class="text-info">
+    port: {{ game.port }}
+  </h4>
   <h2>
     Send command
   </h2>
@@ -105,7 +111,7 @@
           {{ player.score }}
         </td>
         <td>
-          <button v-on:click="kick(player.id)" class="btn btn-danger">
+          <button v-on:click="kick(player.id)" class="btn btn-xs btn-danger">
             kick
           </button>
         </td>
