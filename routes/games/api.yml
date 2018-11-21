@@ -5,6 +5,10 @@ game:
         method: getId
       label:
         method: getLabel
+      host:
+        method: getHost
+      port:
+        method: getPort
       up:
         method: isUp
       map:

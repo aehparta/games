@@ -1,4 +1,7 @@
 
+paths:
+  tmp: tmp
+
 cache:
   type: phpfastcache
 
@@ -6,7 +9,7 @@ games:
   aq:
     label: Action Quake
     class: Games\Quake2
-    host: lanit.lan
+    host: aq.games
     port: 27910
     password: salaisuus
     vars:
@@ -19,7 +22,7 @@ games:
   cs:
     label: Counter-Strike 1.6
     class: Games\CS
-    host: lanit-cs.lan
+    host: cs.games
     port: 27015
     password: salaisuus
     vars:
@@ -72,12 +75,12 @@ games:
   cod2:
     label: 'Call of Duty 2'
     class: Games\Cod2
-    host: lanit.lan
+    host: cod2.games
     port: 28961
     password: salaisuus
   cod4:
     label: 'Call of Duty 4: Modern Warface'
     class: Games\Cod4
-    host: lanit.lan
+    host: cod4.games
     port: 28960
     password: salaisuus

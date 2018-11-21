@@ -1,7 +1,8 @@
 vendor
 web/.htaccess
 *.sublime-workspace
-log
+log/*
+tmp/*
 kehikko
 kehikko.php
 routes/common
