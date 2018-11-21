@@ -32,6 +32,8 @@ game-var:
 game-players:
   get:
     values:
+      id:
+        method: getId
       name:
         method: getName
       score:

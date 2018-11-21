@@ -85,6 +85,11 @@ class CS extends \Games\Game
         return array();
     }
 
+    public function kickPlayer($player_id)
+    {
+        $this->send('kick "' . $player_id . '"');
+    }
+
     private function fetchStatus()
     {
         if (self::$status !== null) {

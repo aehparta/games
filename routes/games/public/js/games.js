@@ -86,6 +86,9 @@ if ($('#games').length) {
 					app.refresh();
 				});
 			},
+			kick: function(id) {
+				api.games.players.destroy(this.id, id);
+			},
 		}
 	});
 }

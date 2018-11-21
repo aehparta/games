@@ -71,6 +71,22 @@ class Game extends \Core\Module
         return count($this->getPlayers());
     }
 
+    public function getPlayer($player_id)
+    {
+        $players = $this->getPlayers();
+        foreach ($$players as $player) {
+            if ($player->getId() == $player_id) {
+                return $player;
+            }
+        }
+        return null;
+    }
+
+    public function kickPlayer($player_name)
+    {
+
+    }
+
     public function restart()
     {
         return false;

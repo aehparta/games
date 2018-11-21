@@ -56,4 +56,11 @@ class GamesApiController extends \Core\Controller
         $data    = $api->parse('game-players', $players);
         return $this->render(null, $data);
     }
+
+    public function playerDeleteAction($game_id, $player_id)
+    {
+        $game = \Games\Game::getGame($game_id);
+        $game->kickPlayer($player_id);
+        return $this->render(null, null);
+    }
 }

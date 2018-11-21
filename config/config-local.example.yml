@@ -45,6 +45,9 @@ games:
       mp_autoteambalance:
         description: Balance teams automatically
         options: [ 0, 1 ]
+      mp_limitteams:
+        description: Maximum player count difference between teams (0 to disable)
+        options: [ 0, 1, 2, 3, 4, 5 ]
       mp_startmoney:
         description: Start with this much money
         options: [ 400, 800, 1600, 3200, 6400, 12800 ]
