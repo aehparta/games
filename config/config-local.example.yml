@@ -24,22 +24,28 @@ games:
     password: salaisuus
     vars:
       mp_friendlyfire:
+        label: Friendly fire
         description: Enable or disable friendly fire
         options: [ 0, 1 ]
         restart: true
       mp_forcechasecam:
+        label: Spectator mode
         description: Spectator mode, 0 = anyone, 1 = team and no free look, 2 = first person only, 3 = team and free look
         options: [ 0, 1, 2, 3 ]
       mp_freezetime:
+        label: Freeze at round start
         description: Freeze seconds at round start
         options: [ 0, 3, 6, 10 ]
       mp_roundtime:
+        label: Minutes per round
         description: Minutes for a single round to last
         options: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
       mp_timelimit:
+        label: Minutes per map
         description: Minutes for a single map to last (0 to disable)
         options: [ 0, 10, 15, 20, 30 ]
       mp_winlimit:
+        label: Wins per map
         description: After how many wins the map is changed (0 to disable)
         options: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
       mp_autoteambalance:
