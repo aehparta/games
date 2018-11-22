@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "129f32dc422337b97debc8f3a36c958b",
+    "content-hash": "7c2efe02abf1ff7488ad671b24f956d4",
     "packages": [
         {
             "name": "kehikko/account",
@@ -207,6 +207,31 @@
             ],
             "description": "Kehikko framework basic user account and authentication UI",
             "time": "2018-11-22T15:47:15+00:00"
+        },
+        {
+            "name": "kehikko/route-admin",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kehikko/route-admin.git",
+                "reference": "f0798f0335b824cebd04d3d7b88017099ad50f81"
+            },
+            "require": {
+                "kehikko/composer": "*",
+                "php": ">=7.0.0"
+            },
+            "type": "kehikko-route",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antti Partanen",
+                    "email": "aehparta@iki.fi"
+                }
+            ],
+            "description": "Admin UI for kehikko framework",
+            "time": "2018-01-15T16:17:59+00:00"
         },
         {
             "name": "kehikko/route-common",
