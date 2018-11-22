@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "894e29842842e9862de564e45ceee8a0",
+    "content-hash": "129f32dc422337b97debc8f3a36c958b",
     "packages": [
         {
             "name": "kehikko/account",
@@ -124,13 +124,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/Core.git",
-                "reference": "c7c0aea576008695809555ed909e4623f2a0fe95"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kehikko/Core/zipball/c7c0aea576008695809555ed909e4623f2a0fe95",
-                "reference": "c7c0aea576008695809555ed909e4623f2a0fe95",
-                "shasum": ""
+                "reference": "8f3b8b55e37b1f8430859807d096e8e355d366e1"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -144,7 +138,6 @@
                     "Core\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -155,7 +148,7 @@
                 }
             ],
             "description": "Core functionality for kehikko framework",
-            "time": "2018-08-31T12:00:36+00:00"
+            "time": "2018-11-21T15:14:51+00:00"
         },
         {
             "name": "kehikko/kernel",
@@ -196,20 +189,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/route-account.git",
-                "reference": "e8347c567e1f6a29968fd92f65813fb285832afc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kehikko/route-account/zipball/e8347c567e1f6a29968fd92f65813fb285832afc",
-                "reference": "e8347c567e1f6a29968fd92f65813fb285832afc",
-                "shasum": ""
+                "reference": "3756b502782aacd39a4055a448a5b373963e9e4a"
             },
             "require": {
                 "kehikko/composer": "*",
                 "php": ">=7.0.0"
             },
             "type": "kehikko-route",
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -220,7 +206,7 @@
                 }
             ],
             "description": "Kehikko framework basic user account and authentication UI",
-            "time": "2018-01-15T16:17:47+00:00"
+            "time": "2018-11-22T14:36:28+00:00"
         },
         {
             "name": "kehikko/route-common",
@@ -228,20 +214,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/route-common.git",
-                "reference": "3ff0ca80f8bed1dbce5e6f3c3760421a66f19ce7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kehikko/route-common/zipball/3ff0ca80f8bed1dbce5e6f3c3760421a66f19ce7",
-                "reference": "3ff0ca80f8bed1dbce5e6f3c3760421a66f19ce7",
-                "shasum": ""
+                "reference": "7034552d620dfb98d321bdab32a3dcf85e68b255"
             },
             "require": {
                 "kehikko/composer": "*",
                 "php": ">=7.0.0"
             },
             "type": "kehikko-route",
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -252,7 +231,7 @@
                 }
             ],
             "description": "Common UI features for kehikko framework",
-            "time": "2018-01-15T16:44:24+00:00"
+            "time": "2018-11-22T14:35:57+00:00"
         },
         {
             "name": "mtdowling/cron-expression",

@@ -10,9 +10,50 @@
   "repositories": [{
     "url": "https://github.com/kehikko/kernel.git",
     "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/Core.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/API.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/Account.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/Address.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/Bin.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/Data.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/SQL.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/Google.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/Messaging.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/route-common.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/route-account.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/route-admin.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/route-address.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/route-api.git",
+    "type": "git"
   }],
-  "require":
-  {
+  "require": {
     "twig/twig": "^2.0",
     "symfony/yaml": "^3.2",
     "mtdowling/cron-expression": "^1.1",
