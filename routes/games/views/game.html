@@ -17,8 +17,8 @@
     Actions
   </h2>
   <div class="row" v-if="game.metadata.actions">
-    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" v-for="(action, label) in game.metadata.actions">
-      <button class="form-control btn btn-sm btn-default" v-on:click="sendAction(action.cmd)">
+    <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2" v-for="(action, label) in game.metadata.actions" style="margin-bottom: 10px;">
+      <button class="form-control btn btn-xs btn-success" v-on:click="sendAction(action.cmd)">
         {{ label }}
       </button>
     </div>
@@ -36,7 +36,7 @@
       </button>
     </div>
   </div>
-  <pre v-if="cmd.output">
+  <pre v-if="cmd.output" style="margin-top: 10px;">
     {{ cmd.output }}
   </pre>
   <h2>

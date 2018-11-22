@@ -94,7 +94,8 @@ class Game extends \Core\Module
 
     public function getMetadata()
     {
-        return \kernel::getConfigValue('games', $this->id, 'metadata');
+        $metadata = \kernel::getConfigValue('games', $this->id, 'metadata');
+        return $metadata ? $metadata : array();
     }
 
     public function send($command)
