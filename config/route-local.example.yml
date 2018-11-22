@@ -1,4 +1,10 @@
 
+admin:
+  pattern: /admin
+
+account:
+  pattern: /account
+
 games:
   pattern: /
   access: role:user
