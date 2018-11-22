@@ -118,7 +118,7 @@
           {{ player.score }}
         </td>
         <td>
-          <button v-on:click="kick(player.id)" class="btn btn-xs btn-danger">
+          <button v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-xs btn-danger">
             kick
           </button>
         </td>

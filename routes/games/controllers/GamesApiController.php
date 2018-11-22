@@ -60,7 +60,9 @@ class GamesApiController extends \Core\Controller
     public function playerDeleteAction($game_id, $player_id)
     {
         $game = \Games\Game::getGame($game_id);
-        $game->kickPlayer($player_id);
+        if (method_exists($game, 'kickPlayer')) {
+            $game->kickPlayer($player_id);
+        }
         return $this->render(null, null);
     }
 }

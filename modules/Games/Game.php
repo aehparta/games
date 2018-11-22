@@ -27,6 +27,11 @@ class Game extends \Core\Module
         return $this->rcon->getPort();
     }
 
+    public function has(string $action)
+    {
+        return method_exists($this, $action);
+    }
+
     public function isUp()
     {
         return false;
@@ -80,11 +85,6 @@ class Game extends \Core\Module
             }
         }
         return null;
-    }
-
-    public function kickPlayer($player_name)
-    {
-
     }
 
     public function restart()

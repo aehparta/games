@@ -90,6 +90,11 @@ class CS extends \Games\Game
         $this->send('kick "' . $player_id . '"');
     }
 
+    // public function renamePlayer($player_id)
+    // {
+    //     $this->send('amx_nick ')
+    // }
+
     private function fetchStatus()
     {
         if (self::$status !== null) {

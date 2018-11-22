@@ -24,7 +24,9 @@ if ($('#games').length) {
 		el: '#game',
 		data: {
 			id: null,
-			game: { metadata: {} },
+			game: {
+				metadata: {}
+			},
 			vars: [],
 			maps: [],
 			players: [],
@@ -69,7 +71,11 @@ if ($('#games').length) {
 				api.games.cmd.create(this.id, {
 					cmd: this.cmd.input
 				}).done(function(data) {
-					app.cmd.output = data.data;
+					if (data.data) {
+						app.cmd.output = data.data;
+					} else {
+						app.cmd.output = "No response.";
+					}
 				});
 			},
 			sendAction: function(cmd) {

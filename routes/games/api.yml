@@ -15,6 +15,15 @@ game:
         method: getMap
       players:
         method: getPlayerCount
+      actions:
+        kick:
+          method: has
+          parameters:
+            - kickPlayer
+        rename:
+          method: has
+          parameters:
+            - renamePlayer
       metadata:
         method: getMetadata
 
