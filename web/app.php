@@ -9,7 +9,7 @@ $kernel = kernel::getInstance();
 
 try {
     $controller = $kernel->load(__DIR__ . '/../config/');
-    if ($kernel->debug()) {
+    if (\kernel::debug()) {
         error_reporting(E_ALL | E_STRICT);
         ini_set('display_errors', 1);
     }
@@ -27,7 +27,7 @@ try {
         $code = 500;
     }
     /* if not in debug mode, print server side errors to log */
-    if (!$kernel->getConfigValue('setup', 'debug') && $code >= 500) {
+    if (!\kernel::debug() && $code >= 500) {
         $kernel->log(LOG_ERR, 'Exception (' . $code . '): ' . $e->getMessage());
     }
     /* exception in the format requested */
@@ -46,7 +46,7 @@ function json_exception($e, $code)
         'success' => false,
         'msg'     => $e->getMessage(),
     );
-    if ($kernel->config['setup']['debug']) {
+    if (\kernel::debug()) {
         $ret['trace'] = array();
         foreach ($e->getTrace() as $n => $trace) {
             $ret['trace'][] = array(
@@ -62,7 +62,7 @@ function html_exception($e, $code, $template)
 {
     $kernel = kernel::getInstance();
     http_response_code($code);
-    if ($kernel->config['setup']['debug']) {
+    if (\kernel::debug() && $code != 403) {
         echo '<pre>';
         echo "Exception:\n";
         echo $e->getMessage() . "\n\n";

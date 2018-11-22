@@ -2,5 +2,10 @@
 common:
   pattern: /common
 
+admin:
+  pattern: /admin
+account:
+  pattern: /account
+
 games:
   pattern: /

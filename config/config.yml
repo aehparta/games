@@ -12,6 +12,10 @@ twig:
 # define module configurations and sometimes classes to be autoloaded
 modules:
   Placeholder: Games/Placeholder
+  Core\Session:
+    timeout: 1800
+    authenticators:
+      - Account\Yaml\Account
 
 # basic site js/css includes
 javascript:

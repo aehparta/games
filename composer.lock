@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf3cd19916f36191c9b08045bd5c4f6b",
+    "content-hash": "894e29842842e9862de564e45ceee8a0",
     "packages": [
+        {
+            "name": "kehikko/account",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kehikko/Account.git",
+                "reference": "6f35032618641a6eb1d9d7f5a889e0367a0ecb4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kehikko/Account/zipball/6f35032618641a6eb1d9d7f5a889e0367a0ecb4b",
+                "reference": "6f35032618641a6eb1d9d7f5a889e0367a0ecb4b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Account\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antti Partanen",
+                    "email": "aehparta@iki.fi"
+                }
+            ],
+            "description": "Kehikko framework basic user accounts",
+            "time": "2018-01-15T16:44:45+00:00"
+        },
         {
             "name": "kehikko/api",
             "version": "1.2.0",
@@ -127,7 +163,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "81104b2aeebae87be5dc4c75ae0877be847d7f2d"
+                "reference": "ab209d2556cd68a643a7635944ebd0e210cf2d63"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -152,11 +188,43 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-11-21T14:36:51+00:00"
+            "time": "2018-11-22T10:59:41+00:00"
+        },
+        {
+            "name": "kehikko/route-account",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kehikko/route-account.git",
+                "reference": "e8347c567e1f6a29968fd92f65813fb285832afc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kehikko/route-account/zipball/e8347c567e1f6a29968fd92f65813fb285832afc",
+                "reference": "e8347c567e1f6a29968fd92f65813fb285832afc",
+                "shasum": ""
+            },
+            "require": {
+                "kehikko/composer": "*",
+                "php": ">=7.0.0"
+            },
+            "type": "kehikko-route",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antti Partanen",
+                    "email": "aehparta@iki.fi"
+                }
+            ],
+            "description": "Kehikko framework basic user account and authentication UI",
+            "time": "2018-01-15T16:17:47+00:00"
         },
         {
             "name": "kehikko/route-common",
-            "version": "1.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/route-common.git",
@@ -781,7 +849,10 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "kehikko/kernel": 20,
-        "kehikko/core": 20
+        "kehikko/core": 20,
+        "kehikko/route-common": 20,
+        "kehikko/account": 20,
+        "kehikko/route-account": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

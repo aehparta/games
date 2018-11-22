@@ -19,8 +19,10 @@
     "pear/console_commandline": "^1.2",
     "kehikko/kernel": "dev-master",
     "kehikko/core": "dev-master",
-    "kehikko/route-common": "^1.1",
+    "kehikko/route-common": "dev-master",
     "kehikko/api": "^1.1",
-    "phpfastcache/phpfastcache": "^7.0"
+    "phpfastcache/phpfastcache": "^7.0",
+    "kehikko/account": "dev-master",
+    "kehikko/route-account": "dev-master"
   }
 }

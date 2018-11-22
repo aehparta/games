@@ -1,0 +1,4 @@
+
+games:
+  pattern: /
+  access: role:user
