@@ -74,6 +74,12 @@ games:
       pb_maxbotskill:
         description: Default bot skill
         options: [ 1, 10, 30, 50, 80, 100 ]
+    metadata:
+      actions:
+        Add Bot 50 T:
+          cmd: pb add 50 1 1
+        Add Bot 50 CT:
+          cmd: pb add 50 1 2
   cod2:
     label: 'Call of Duty 2'
     class: Games\Cod2

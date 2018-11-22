@@ -92,6 +92,11 @@ class Game extends \Core\Module
         return false;
     }
 
+    public function getMetadata()
+    {
+        return \kernel::getConfigValue('games', $this->id, 'metadata');
+    }
+
     public function send($command)
     {
         return $this->rcon->send($command);

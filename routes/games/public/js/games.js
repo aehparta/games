@@ -24,7 +24,7 @@ if ($('#games').length) {
 		el: '#game',
 		data: {
 			id: null,
-			game: {},
+			game: { metadata: {} },
 			vars: [],
 			maps: [],
 			players: [],
@@ -70,6 +70,11 @@ if ($('#games').length) {
 					cmd: this.cmd.input
 				}).done(function(data) {
 					app.cmd.output = data.data;
+				});
+			},
+			sendAction: function(cmd) {
+				api.games.cmd.create(this.id, {
+					cmd: cmd
 				});
 			},
 			setVar: function(e) {
