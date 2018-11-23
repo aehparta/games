@@ -156,7 +156,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "ab209d2556cd68a643a7635944ebd0e210cf2d63"
+                "reference": "78859e6962b821fa88c0270b86ac3cbc61d8e400"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -167,6 +167,9 @@
             ],
             "type": "library",
             "autoload": {
+                "files": [
+                    "cfg.php"
+                ],
                 "psr-0": {
                     "kernel": ""
                 }
@@ -181,7 +184,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-11-22T10:59:41+00:00"
+            "time": "2018-11-23T10:39:41+00:00"
         },
         {
             "name": "kehikko/route-account",

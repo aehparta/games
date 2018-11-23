@@ -11,9 +11,9 @@ class Game extends \Core\Module
     {
         parent::__construct();
         $this->id   = $id;
-        $host       = \kernel::getConfigValue('games', $id, 'host');
-        $port       = \kernel::getConfigValue('games', $id, 'port');
-        $password   = \kernel::getConfigValue('games', $id, 'password');
+        $host       = cfg('games:' . $id . ':host');
+        $port       = cfg('games:' . $id . ':port');
+        $password   = cfg('games:' . $id . ':password');
         $this->rcon = new \Games\Rcon($host, $port, $password);
     }
 
@@ -44,11 +44,7 @@ class Game extends \Core\Module
 
     public function getLabel()
     {
-        $label = \kernel::getConfigValue('games', $this->id, 'label');
-        if ($label) {
-            return $label;
-        }
-        return $this->getId();
+        return cfg('games:' . $this->id . ':label', $this->getId());
     }
 
     public function getMaps()
@@ -94,8 +90,7 @@ class Game extends \Core\Module
 
     public function getMetadata()
     {
-        $metadata = \kernel::getConfigValue('games', $this->id, 'metadata');
-        return $metadata ? $metadata : array();
+        return cfg('games:' . $this->id . ':metadata', array());
     }
 
     public function send($command)
@@ -105,7 +100,7 @@ class Game extends \Core\Module
 
     public function getVar($var_id)
     {
-        $var = \kernel::getConfigValue('games', $this->id, 'vars', $var_id);
+        $var = cfg('games:' . $this->id . ':vars:' . $var_id);
         if (!$var) {
             return null;
         }
@@ -138,7 +133,7 @@ class Game extends \Core\Module
     public function setVarValue($var_id, $value)
     {
         $this->send($var_id . ' ' . $value);
-        if (\kernel::getConfigValue('games', $this->id, 'vars', $var_id, 'restart') === true) {
+        if (cfg(array('games', $this->id, 'vars', $var_id, 'restart')) === true) {
             $this->restart();
         }
         $this->cacheSet($this->id . ':var:' . $var_id, null, 0);
@@ -147,10 +142,7 @@ class Game extends \Core\Module
 
     public function getVars()
     {
-        $vars = \kernel::getConfigValue('games', $this->id, 'vars');
-        if (!$vars) {
-            return array();
-        }
+        $vars = cfg(array('games', $this->id, 'vars'), array());
         foreach ($vars as $key => &$var) {
             $var['id']    = $key;
             $var['value'] = $this->getVarValue($key);
@@ -168,11 +160,8 @@ class Game extends \Core\Module
 
     public static function getGames()
     {
-        $games_cfg = \kernel::getConfigValue('games');
-        if (!is_array($games_cfg)) {
-            return array();
-        }
-        $games = array();
+        $games_cfg = cfg('games', array());
+        $games     = array();
         foreach ($games_cfg as $id => $cfg) {
             if (class_exists($cfg['class'])) {
                 $games[] = new $cfg['class']($id);
