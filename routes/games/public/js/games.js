@@ -83,6 +83,10 @@ if ($('#games').length) {
 					}
 				});
 			},
+			clearCommand: function() {
+				app.cmd.input = '';
+				app.cmd.output = null;
+			},
 			sendAction: function(action) {
 				action.sending = true;
 				api.games.cmd.create(this.id, {

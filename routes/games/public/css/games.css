@@ -1,17 +1,28 @@
-
 .game-var-select {
-	width: 100%;
-	height: 100%;
-	border: 1px solid #777;
-	background: #fff;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #777;
+  background: #fff;
 }
 
 .game-player-face {
-	width: 32px;
-	height: 32px;
-	margin-right: 5px;
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
 }
 
 .game-player {
-	font-size: large;
+  font-size: large;
+}
+
+.game-custom-command-clear {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+    color: #777;
 }
