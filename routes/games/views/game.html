@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-      <button v-on:click="sendCommand" class="form-control btn btn-primary">
+      <button v-if="cmd.input" v-on:click="sendCommand" class="form-control btn btn-primary">
         <i class="fa fa-check"></i>
         Send
       </button>
