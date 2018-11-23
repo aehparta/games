@@ -3,41 +3,56 @@
  * */
 
 html {
-	position: relative;
-	min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-	background: #fff;
-	color: #333;
-	margin-bottom: 40px;
+  background: #fff;
+  color: #333;
+  margin-bottom: 40px;
+  background-image: url(/images/aziz.jpg);
+  background-size: 100% auto;
 }
 
+#background {
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: -999;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.9) 10%, rgba(255, 255, 255, 1.0) 100%);
+}
+
+.navbar {
+  background: rgba(0, 0, 0, 0.7);
+}
 
 /*
  * footer
  */
 
 footer {
-	background: #666;
-	color: #333;
-	padding: 10px;
-	border-top: 1px solid #333;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 40px;
+  background: #666;
+  color: #333;
+  padding: 10px;
+  border-top: 1px solid #333;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
 }
-
 
 /*
  * generic helpers
  */
 
 .no-padding {
-	padding: 0px !important;
+  padding: 0px !important;
 }
 
 .no-margin {
-	margin: 0px !important;
+  margin: 0px !important;
 }

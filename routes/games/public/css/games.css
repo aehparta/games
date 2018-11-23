@@ -5,3 +5,13 @@
 	border: 1px solid #777;
 	background: #fff;
 }
+
+.game-player-face {
+	width: 32px;
+	height: 32px;
+	margin-right: 5px;
+}
+
+.game-player {
+	font-size: large;
+}

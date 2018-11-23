@@ -65,27 +65,18 @@ games:
       mp_startmoney:
         description: Start with this much money
         options: [ 400, 800, 1600, 3200, 6400, 12800 ]
-      sv_restart:
-        description: Restart server after setting this timeout (seconds)
-        options: [ 10, 5, 1 ]
     metadata:
       actions:
+        Restart:
+          cmd: sv_restart 1
         Add Bot Normal T:
-          cmd: pb add 50 1 1
+          cmd: pb add 50 5 1 5
         Add Bot Normal CT:
-          cmd: pb add 50 1 2
+          cmd: pb add 50 5 2 5
         Kill Bots:
           cmd: pb killbots
         Remove Bots:
           cmd: pb removebots
-        # Add Bot Normal T:
-        #   cmd: yb add 4 0 1
-        # Add Bot Normal CT:
-        #   cmd: yb add 4 0 2
-        # Kill Bots:
-        #   cmd: yb killall
-        # Remove Bots:
-        #   cmd: yb kickall
   cod2:
     label: 'Call of Duty 2'
     class: Games\Cod2

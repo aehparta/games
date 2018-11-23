@@ -43,6 +43,11 @@ if ($('#games').length) {
 		methods: {
 			refresh: function() {
 				api.games.read(this.id).done(function(data) {
+					if (data.data.metadata.actions) {
+						Object.keys(data.data.metadata.actions).forEach(function(key) {
+							data.data.metadata.actions[key].sending = false;
+						});
+					}
 					app.game = Object.assign({}, app.game, data.data);
 				});
 				if (this.maps.length < 1) {
@@ -78,9 +83,12 @@ if ($('#games').length) {
 					}
 				});
 			},
-			sendAction: function(cmd) {
+			sendAction: function(action) {
+				action.sending = true;
 				api.games.cmd.create(this.id, {
-					cmd: cmd
+					cmd: action.cmd
+				}).done(function() {
+					action.sending = false;
 				});
 			},
 			setVar: function(e) {

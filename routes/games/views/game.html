@@ -18,7 +18,8 @@
   </h2>
   <div class="row" v-if="game.metadata.actions">
     <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2" v-for="(action, label) in game.metadata.actions" style="margin-bottom: 10px;">
-      <button class="form-control btn btn-xs btn-success" v-on:click="sendAction(action.cmd)">
+      <button class="form-control btn btn-xs btn-success" :disabled="action.sending" v-on:click="sendAction(action)">
+        <i v-if="action.sending" class="fa fa-lg fa-spin fa-crosshairs"></i>
         {{ label }}
       </button>
     </div>
@@ -110,12 +111,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="player in players">
+      <tr v-for="player in players" class="game-player">
         <td>
-          {{ player.name }}
+          <img class="game-player-face" src="/images/face.jpg"/>
+          <span class="game-player-name">
+            {{ player.name }}
+          </span>
         </td>
         <td>
-          {{ player.score }}
+          <span class="game-player-score">
+            {{ player.score }}
+          </span>
         </td>
         <td>
           <button v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-xs btn-danger">
