@@ -15,7 +15,7 @@ if ($('#games').length) {
 						app.games.push(e);
 					});
 				});
-				setTimeout(this.refresh, 5000);
+				setTimeout(this.refresh, 1000);
 			},
 		}
 	});
