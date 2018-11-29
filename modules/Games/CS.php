@@ -109,6 +109,10 @@ class CS extends \Games\Game
 
         self::$status = array('hostname' => null, 'map' => null, 'players' => array());
         $lines        = explode("\n", $r);
+        if (count($lines) < 4) {
+            self::$status = false;
+            return false;
+        }
 
         /* parse hostname */
         preg_match('/[\s]*hostname[\s]*:[\s]*([^\n]+)/', $lines[0], $hostname);
