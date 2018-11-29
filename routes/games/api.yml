@@ -20,6 +20,10 @@ game:
           method: has
           parameters:
             - kickPlayer
+        kill:
+          method: has
+          parameters:
+            - killPlayer
         rename:
           method: has
           parameters:
@@ -33,6 +37,9 @@ game-cmd:
       cmd:
         type: string
         required: true
+      timeout:
+        type: number
+        required: false
 
 game-var:
   put:
@@ -53,4 +60,5 @@ game-players:
         method: getName
       score:
         method: getScore
-        
+      bot:
+        method: isBot

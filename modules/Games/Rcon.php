@@ -127,17 +127,17 @@ class Rcon
             return $response;
         }
 
-        $response = ltrim($response, "\xff");
-        $len = strlen($this->response_trim);
-        if (substr($response, 0, $len) == $this->response_trim) {
-            $response = substr($response, $len);
-        }
+        $response = str_replace("\xff\xff\xff\xff" . $this->response_trim, '', $response);
+        // $response = preg_replace('/[[:cntrl:]]/', '', $response);
+        // $response = preg_replace('/[[:cntrl:]]+/', '', $response);
+        // preg_replace("/\^./", '', $response);
+
         $response = trim($response);
         if (empty($response)) {
             return null;
         }
 
-        return preg_replace("/\^./", '', $response);
+        return $response;
     }
 
     /**

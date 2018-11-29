@@ -74,7 +74,8 @@ if ($('#games').length) {
 			sendCommand: function() {
 				app.cmd.output = null;
 				api.games.cmd.create(this.id, {
-					cmd: this.cmd.input
+					cmd: this.cmd.input,
+					timeout: 0.5,
 				}).done(function(data) {
 					if (data.data) {
 						app.cmd.output = data.data;
@@ -111,6 +112,9 @@ if ($('#games').length) {
 			},
 			kick: function(id) {
 				api.games.players.destroy(this.id, id);
+			},
+			kill: function(id) {
+				api.games.players.update(this.id, id, {});
 			},
 		}
 	});

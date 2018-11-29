@@ -62,7 +62,7 @@ function html_exception($e, $code, $template)
 {
     $kernel = kernel::getInstance();
     http_response_code($code);
-    if (\kernel::debug() && $code != 403) {
+    if (\kernel::debug() && $code != 403 && $code != 404) {
         echo '<pre>';
         echo "Exception:\n";
         echo $e->getMessage() . "\n\n";

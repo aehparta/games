@@ -41,6 +41,15 @@ game-api-player-delete:
   pattern: '/api/games/{game_id}/players/{player_id}'
   controller: GamesApi
   action: playerDelete
+  method: delete
+  format: json
+  history: false
+
+game-api-player:
+  pattern: '/api/games/{game_id}/players/{player_id}'
+  controller: GamesApi
+  action: playerUpdate
+  method: [ 'put', 'post' ]
   format: json
   history: false
 

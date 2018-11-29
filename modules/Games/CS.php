@@ -90,10 +90,10 @@ class CS extends \Games\Game
         $this->send('kick "' . $player_id . '"');
     }
 
-    // public function renamePlayer($player_id)
-    // {
-    //     $this->send('amx_nick ')
-    // }
+    public function killPlayer($player_id)
+    {
+        $this->send('amx_slay "' . $player_id . '"');
+    }
 
     private function fetchStatus()
     {
@@ -121,11 +121,11 @@ class CS extends \Games\Game
         /* parse players */
         foreach (array_slice($lines, 7) as $p) {
             $matches = array();
-            preg_match('/[#0-9\s]+"([^"]+)"[\s]+[0-9]+[\s]+[^\s]+[\s]+([0-9]+)/', trim($p), $matches);
-            if (count($matches) != 3) {
+            preg_match('/[#0-9\s]+"([^"]+)"[\s]+[0-9]+[\s]+([^\s]+)[\s]+([0-9]+)/', trim($p), $matches);
+            if (count($matches) != 4) {
                 continue;
             }
-            self::$status['players'][] = new Player($matches[1], $matches[2]);
+            self::$status['players'][] = new Player($matches[1], $matches[3], $matches[2] === 'BOT');
         }
 
         return self::$status;

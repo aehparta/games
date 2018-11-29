@@ -156,7 +156,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "78859e6962b821fa88c0270b86ac3cbc61d8e400"
+                "reference": "f47a5c059c71bb802e007c94e3d626cb1f46874a"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -168,7 +168,10 @@
             "type": "library",
             "autoload": {
                 "files": [
-                    "cfg.php"
+                    "cfg.php",
+                    "cache.php",
+                    "log.php",
+                    "emit.php"
                 ],
                 "psr-0": {
                     "kernel": ""
@@ -184,7 +187,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-11-23T10:39:41+00:00"
+            "time": "2018-11-27T09:41:21+00:00"
         },
         {
             "name": "kehikko/route-account",
@@ -192,7 +195,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/route-account.git",
-                "reference": "7bbb7a2ad3884b10c5a9a4eb483e1be263d0ee69"
+                "reference": "db1b5d33dad5cf33cd4ad7ed7b494959782890fe"
             },
             "require": {
                 "kehikko/composer": "*",
@@ -209,7 +212,7 @@
                 }
             ],
             "description": "Kehikko framework basic user account and authentication UI",
-            "time": "2018-11-22T15:47:15+00:00"
+            "time": "2018-11-27T09:51:10+00:00"
         },
         {
             "name": "kehikko/route-admin",
@@ -726,16 +729,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.18",
+            "version": "v3.4.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "640b6c27fed4066d64b64d5903a86043f4a4de7f"
+                "reference": "291e13d808bec481eab83f301f7bff3e699ef603"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/640b6c27fed4066d64b64d5903a86043f4a4de7f",
-                "reference": "640b6c27fed4066d64b64d5903a86043f4a4de7f",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/291e13d808bec481eab83f301f7bff3e699ef603",
+                "reference": "291e13d808bec481eab83f301f7bff3e699ef603",
                 "shasum": ""
             },
             "require": {
@@ -781,7 +784,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T16:33:53+00:00"
+            "time": "2018-11-11T19:48:54+00:00"
         },
         {
             "name": "twig/twig",

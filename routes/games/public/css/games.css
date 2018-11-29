@@ -6,13 +6,17 @@
 }
 
 .game-player-face {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   margin-right: 5px;
 }
 
 .game-player {
   font-size: large;
+}
+
+.game-player td {
+	vertical-align: middle!important;
 }
 
 .game-custom-command-clear {

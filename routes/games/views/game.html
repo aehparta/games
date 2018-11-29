@@ -117,7 +117,8 @@
     <tbody>
       <tr v-for="player in players" class="game-player">
         <td>
-          <img class="game-player-face" src="/images/face.jpg"/>
+          <img v-if="player.bot" class="game-player-face" src="/images/bot.jpg"/>
+          <img v-else class="game-player-face" src="/images/face.jpg"/>
           <span class="game-player-name">
             {{ player.name }}
           </span>
@@ -128,7 +129,10 @@
           </span>
         </td>
         <td>
-          <button v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-xs btn-danger">
+          <button v-if="game.actions.kill" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
+            kill
+          </button>
+          <button v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-sm btn-danger">
             kick
           </button>
         </td>

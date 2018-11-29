@@ -6,11 +6,13 @@ class Player
 {
     private $name;
     private $score;
+    private $bot;
 
-    public function __construct($name, $score = 0)
+    public function __construct($name, $score = 0, $bot = false)
     {
         $this->name  = $name;
         $this->score = intval($score);
+        $this->bot   = $bot;
     }
 
     public function getId()
@@ -26,5 +28,10 @@ class Player
     public function getScore()
     {
         return $this->score;
+    }
+
+    public function isBot()
+    {
+        return $this->bot;
     }
 }

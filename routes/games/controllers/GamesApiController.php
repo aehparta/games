@@ -31,6 +31,9 @@ class GamesApiController extends \Core\Controller
         $api  = new \API\API($this);
         $data = $api->parse('game-cmd');
         $game = \Games\Game::getGame($game_id);
+        if (isset($data['timeout'])) {
+            $game->setTimeout($data['timeout']);
+        }
         $r    = $game->send($data['cmd']);
         return $this->render(null, $r);
     }
@@ -62,6 +65,15 @@ class GamesApiController extends \Core\Controller
         $game = \Games\Game::getGame($game_id);
         if (method_exists($game, 'kickPlayer')) {
             $game->kickPlayer($player_id);
+        }
+        return $this->render(null, null);
+    }
+
+    public function playerUpdateAction($game_id, $player_id)
+    {
+        $game = \Games\Game::getGame($game_id);
+        if (method_exists($game, 'killPlayer')) {
+            $game->killPlayer($player_id);
         }
         return $this->render(null, null);
     }
