@@ -73,7 +73,8 @@ class CS extends \Games\Game
 
     public function setMap(string $map)
     {
-        return $this->send('changelevel ' . $map);
+        $this->send('changelevel ' . $map);
+        $this->cacheSet($this->id . ':status', null, 0);
     }
 
     public function getPlayers()
@@ -88,15 +89,23 @@ class CS extends \Games\Game
     public function kickPlayer($player_id)
     {
         $this->send('kick "' . $player_id . '"');
+        $this->cacheSet($this->id . ':status', null, 0);
     }
 
     public function killPlayer($player_id)
     {
         $this->send('amx_slay "' . $player_id . '"');
+        $this->cacheSet($this->id . ':status', null, 0);
     }
 
     private function fetchStatus()
     {
+        $status = $this->cacheGet($this->id . ':status');
+        if ($status) {
+            self::$status = $status;
+            return self::$status;
+        }
+
         if (self::$status !== null) {
             return self::$status;
         }
@@ -131,6 +140,8 @@ class CS extends \Games\Game
             }
             self::$status['players'][] = new Player($matches[1], $matches[3], $matches[2] === 'BOT');
         }
+
+        $this->cacheSet($this->id . ':status', self::$status, 7);
 
         return self::$status;
     }

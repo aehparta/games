@@ -126,7 +126,7 @@ class Game extends \Core\Module
             return null;
         }
         $v = trim($matches[2], ' "');
-        $this->cacheSet($this->id . ':var:' . $var_id, $v, 30);
+        $this->cacheSet($this->id . ':var:' . $var_id, $v, 30 + rand(0, 30));
         return $v;
     }
 
@@ -137,7 +137,6 @@ class Game extends \Core\Module
             $this->restart();
         }
         $this->cacheSet($this->id . ':var:' . $var_id, null, 0);
-
     }
 
     public function getVars()
