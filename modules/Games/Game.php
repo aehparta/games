@@ -67,6 +67,11 @@ class Game extends \Core\Module
         return array();
     }
 
+    public function getTeams()
+    {
+        return null;
+    }
+
     public function getPlayerCount()
     {
         return count($this->getPlayers());
