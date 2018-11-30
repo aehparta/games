@@ -13,6 +13,11 @@
 
 .game-player {
   font-size: large;
+  background: #ffe0e0;
+}
+
+.game-player-alive {
+  background: #e0f0e0;
 }
 
 .game-player td {

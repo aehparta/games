@@ -100,7 +100,7 @@
   <h3>
     Players ({{ game.players }})
   </h3>
-  <table class="table table-striped table-hover">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>
@@ -108,6 +108,9 @@
         </th>
         <th>
           Score
+        </th>
+        <th>
+          Deaths
         </th>
         <th>
           Team
@@ -118,7 +121,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="player in players" class="game-player">
+      <tr v-for="player in players" class="game-player" v-bind:class="{ 'game-player-alive': player.alive }">
         <td>
           <img v-if="player.bot" class="game-player-face" src="/images/bot.jpg"/>
           <img v-else class="game-player-face" src="/images/face.jpg"/>
@@ -132,12 +135,17 @@
           </span>
         </td>
         <td>
-          <span class="game-player-team">
-            {{ game.teams[player.team].label }}
+          <span class="game-player-deaths">
+            {{ player.deaths }}
           </span>
         </td>
         <td>
-          <button v-if="game.actions.kill" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
+          <span class="game-player-team">
+            {{ game.teams[player.team] ? game.teams[player.team].label : '' }}
+          </span>
+        </td>
+        <td>
+          <button :disabled="!player.alive" v-if="game.actions.kill" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
             kill
           </button>
           <button v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-sm btn-danger">
