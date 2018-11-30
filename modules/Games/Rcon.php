@@ -109,7 +109,7 @@ class Rcon
      * @throws Exception If the UDP socket has not been correctly initialized
      * @return The       server response as a string if it's valid otherwise NULL
      */
-    private function read($raw = false)
+    public function read($raw = false)
     {
         if (is_null($this->socket)) {
             \kernel::log(LOG_ERR, 'could not read response: UDP socket is NULL');

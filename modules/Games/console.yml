@@ -12,6 +12,15 @@ commands:
         description: password
       command:
         description: command to send
+  server:udp:
+    description: start listening server on local address and port
+    class: \Games\Server
+    method: serve
+    arguments:
+      address:
+        description: local ip
+      port:
+        description: port
   list:
     description: list enabled games
     class: \Games\Game
