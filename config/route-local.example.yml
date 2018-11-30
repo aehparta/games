@@ -1,10 +1,10 @@
 
-admin:
-  pattern: /admin
+# admin:
+#   pattern: /admin
 
-account:
-  pattern: /account
+# account:
+#   pattern: /account
 
-games:
-  pattern: /
-  access: role:user
+# games:
+#   pattern: /
+#   access: role:user

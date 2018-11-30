@@ -42,7 +42,11 @@
   bottom: 0px;
   right: 0px;
   left: 0px;
+  padding: 5px;
   padding-left: 50px;
   background: #000;
   opacity: 0.777;
+  font-size: 20px;
+  font-weight: 900;
+  color: #a0c0a0;
 }

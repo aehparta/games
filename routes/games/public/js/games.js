@@ -39,6 +39,17 @@ if ($('#games').length) {
 		created: function() {
 			this.id = window.location.pathname.replace(/\//g, '');
 			this.refresh();
+			setInterval(function() {
+				if (app.game.round) {
+					app.game.round.time.elapsed += 0.1;
+				}
+			}, 100);
+		},
+		filters: {
+			secondsFormat: function(seconds) {
+				var t = new Date(2000, 0, 1, 0, 0, seconds);
+				return moment(t).format('mm:ss');
+			},
 		},
 		methods: {
 			refresh: function() {
@@ -48,7 +59,17 @@ if ($('#games').length) {
 							data.data.metadata.actions[key].sending = false;
 						});
 					}
+					var t = null;
+					if (app.game.round) {
+						t = app.game.round.time.elapsed;
+						if (app.game.round.time.elapsed < data.data.round.time.elapsed || Math.abs(app.game.round.time.elapsed - data.data.round.time.elapsed) > 10) {
+							t = data.data.round.time.elapsed;
+						}
+					}
 					app.game = Object.assign({}, app.game, data.data);
+					if (app.game.round && t !== null) {
+						app.game.round.time.elapsed = t;
+					}
 				});
 				if (this.maps.length < 1) {
 					api.games.maps.read(this.id).done(function(data) {
