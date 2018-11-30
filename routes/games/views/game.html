@@ -110,6 +110,9 @@
           Score
         </th>
         <th>
+          Team
+        </th>
+        <th>
           Actions
         </th>
       </tr>
@@ -126,6 +129,11 @@
         <td>
           <span class="game-player-score">
             {{ player.score }}
+          </span>
+        </td>
+        <td>
+          <span class="game-player-team">
+            {{ game.teams[player.team].label }}
           </span>
         </td>
         <td>

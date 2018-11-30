@@ -15,6 +15,8 @@ game:
         method: getMap
       players:
         method: getPlayerCount
+      teams:
+        method: getTeams
       actions:
         kick:
           method: has
@@ -62,3 +64,15 @@ game-players:
         method: getScore
       bot:
         method: isBot
+      team:
+        method: getValue
+        parameters:
+          - team
+      alive:
+        method: getValue
+        parameters:
+          - alive
+      deaths:
+        method: getValue
+        parameters:
+          - deaths

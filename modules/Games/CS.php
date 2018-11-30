@@ -86,6 +86,15 @@ class CS extends \Games\Game
         return array();
     }
 
+    public function getTeams()
+    {
+        $status = $this->fetchStatus();
+        if (isset($status['teams'])) {
+            return $status['teams'];
+        }
+        return null;
+    }
+
     public function kickPlayer($player_id)
     {
         $this->send('kick "' . $player_id . '"');
@@ -110,13 +119,34 @@ class CS extends \Games\Game
             return self::$status;
         }
 
+        $r = $this->send('amx_status');
+        if ($r) {
+            $r = json_decode($r, true);
+            if (isset($r['players']) && isset($r['map']) && isset($r['hostname'])) {
+                self::$status = array(
+                    'hostname' => $r['hostname'],
+                    'map'      => $r['map'],
+                    'players'  => array(),
+                    'teams'    => array(
+                        'TERRORIST' => array('label' => 'Terrorists', 'active' => true),
+                        'CT'        => array('label' => 'Counter-Terrorists', 'active' => true),
+                    ),
+                );
+                foreach ($r['players'] as $p) {
+                    self::$status['players'][] = new Player($p['name'], $p['score'], $p['bot'], $p);
+                }
+                $this->cacheSet($this->id . ':status', self::$status, 7);
+                return self::$status;
+            }
+        }
+
         $r = $this->send('status');
         if (!$r) {
             self::$status = false;
             return false;
         }
 
-        self::$status = array('hostname' => null, 'map' => null, 'players' => array());
+        self::$status = array('hostname' => null, 'map' => null, 'players' => array(), 'teams' => array());
         $lines        = explode("\n", $r);
         if (count($lines) < 4) {
             self::$status = false;
@@ -138,7 +168,7 @@ class CS extends \Games\Game
             if (count($matches) != 4) {
                 continue;
             }
-            self::$status['players'][] = new Player($matches[1], $matches[3], $matches[2] === 'BOT');
+            self::$status['players'][] = new Player($matches[1], $matches[3], 0, $matches[2] === 'BOT');
         }
 
         $this->cacheSet($this->id . ':status', self::$status, 7);

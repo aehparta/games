@@ -3,6 +3,29 @@ Games handling webui.
 
 Also other stuff saved here mostly for our lan gaming parties.
 
+## Prerequisites
+
+* apache2 (or some other which ever you want)
+* php7 (with some extensions, figure it out, at least mbstring, xml, and cli)
+* composer (used as globally installed one in this doc)
+
+## Install
+
+Get sources and then in sources root:
+
+```sh
+# install depencies
+composer install
+# copy config template and modify it to your setup
+cp config/config-local.example.yml config/config-local.yml
+nano config/config-local.yml
+# update system asset paths
+./kehikko assets:update
+# setup apache htaccess if apache is being used (remember to enable mod rewrite)
+cp config/htaccess.default web/.htaccess
+```
+
+
 # Configuring games
 ## Counter-Strike 1.6
 ### Example configuration `cstrike/csserver.cfg`
@@ -66,8 +89,14 @@ sv_downloadurl "http://<games-webui-url>/files/cs"
 +map de_dust2 +servercfgfile csserver.cfg -maxplayers 32 -insecure +sv_lan 0
 ```
 
-### Suggested addons
+### Required addons
+
+For this webui to work fully you should install theses addons:
+
 * metamod (of course)
 * amxmodx
+
+### Suggested addons
+
 * podbot
 * semiclip (because bots)

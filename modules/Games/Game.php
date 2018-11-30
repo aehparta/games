@@ -196,7 +196,15 @@ class Game extends \Core\Module
         $r = $game->send($args['command']);
         if ($r) {
             echo $game->getId() . ':' . $game->getLabel() . ':response:' . "\n";
-            echo $r . "\n";
+            for ($i = 0; $i < strlen($r); $i++) {
+                $c = $r[$i];
+                if (ctype_space($c) || ctype_print($c)) {
+                    echo $c;
+                } else {
+                    echo '?[' . ord($c) . ']';
+                }
+            }
+            echo "\n";
         } else {
             echo $game->getId() . ':' . $game->getLabel() . ':response: No response' . "\n";
         }

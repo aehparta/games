@@ -15,7 +15,7 @@ if ($('#games').length) {
 						app.games.push(e);
 					});
 				});
-				setTimeout(this.refresh, 1000);
+				setTimeout(this.refresh, 3000);
 			},
 		}
 	});
@@ -69,7 +69,7 @@ if ($('#games').length) {
 				api.games.vars.read(this.id).done(function(data) {
 					app.vars = Object.assign({}, app.vars, data.data);
 				});
-				this.timer = setTimeout(this.refresh, 5000);
+				this.timer = setTimeout(this.refresh, 3000);
 			},
 			sendCommand: function() {
 				app.cmd.output = null;

@@ -128,9 +128,7 @@ class Rcon
         }
 
         $response = str_replace("\xff\xff\xff\xff" . $this->response_trim, '', $response);
-        // $response = preg_replace('/[[:cntrl:]]/', '', $response);
-        // $response = preg_replace('/[[:cntrl:]]+/', '', $response);
-        // preg_replace("/\^./", '', $response);
+        $response = str_replace("\x00", '', $response);
 
         $response = trim($response);
         if (empty($response)) {
