@@ -95,6 +95,15 @@ class CS extends \Games\Game
         return null;
     }
 
+    public function getRoundStatus()
+    {
+        $status = $this->fetchStatus();
+        if (isset($status['round'])) {
+            return array('round' => $status['round'], 'time' => $status['roundtime']);
+        }
+        return null;
+    }
+
     public function kickPlayer($player_id)
     {
         $this->send('kick "' . $player_id . '"');
@@ -124,13 +133,15 @@ class CS extends \Games\Game
             $r = json_decode($r, true);
             if (isset($r['players']) && isset($r['map']) && isset($r['hostname'])) {
                 self::$status = array(
-                    'hostname' => $r['hostname'],
-                    'map'      => $r['map'],
-                    'players'  => array(),
-                    'teams'    => array(
-                        'TERRORIST' => array('label' => 'Terrorists', 'active' => true),
-                        'CT'        => array('label' => 'Counter-Terrorists', 'active' => true),
+                    'hostname'  => $r['hostname'],
+                    'map'       => $r['map'],
+                    'players'   => array(),
+                    'teams'     => array(
+                        'TERRORIST' => array('label' => 'Terrorists', 'active' => true, 'score' => $r['score']['TERRORIST']),
+                        'CT'        => array('label' => 'Counter-Terrorists', 'active' => true, 'score' => $r['score']['CT']),
                     ),
+                    'roundtime' => $r['roundtime'],
+                    'round'     => $r['round'],
                 );
                 foreach ($r['players'] as $p) {
                     self::$status['players'][] = new Player($p['name'], $p['score'], $p['bot'], $p);
@@ -146,7 +157,7 @@ class CS extends \Games\Game
             return false;
         }
 
-        self::$status = array('hostname' => null, 'map' => null, 'players' => array(), 'teams' => array());
+        self::$status = array('hostname' => null, 'map' => null, 'players' => array());
         $lines        = explode("\n", $r);
         if (count($lines) < 4) {
             self::$status = false;

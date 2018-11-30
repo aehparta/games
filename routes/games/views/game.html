@@ -155,6 +155,23 @@
       </tr>
     </tbody>
   </table>
+  <div v-if="game.teams" id="game-scoreboard" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      <h4 class="text-info row">
+        <div v-for="team in game.teams">
+          <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+            {{ team.label }}:
+          </div>
+          <div class="col-xs-6 col-sm-9 col-md-9 col-lg-10">
+            {{ team.score }}
+          </div>
+        </div>
+      </h4>
+    </div>
+    <h3 v-if="game.round" class="text-info col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      {{ game.round.round }}: {{ game.round.time.total - game.round.time.elapsed }}
+    </h3>
+  </div>
 </div>
 {% endverbatim %}
 {% endblock content %}

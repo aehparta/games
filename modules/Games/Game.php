@@ -72,6 +72,11 @@ class Game extends \Core\Module
         return null;
     }
 
+    public function getRoundStatus()
+    {
+        return null;
+    }
+
     public function getPlayerCount()
     {
         return count($this->getPlayers());
@@ -200,6 +205,7 @@ class Game extends \Core\Module
         $game->setTimeout($options['timeout']);
         $r = $game->send($args['command']);
         if ($r) {
+            $invalid = 0;
             echo $game->getId() . ':' . $game->getLabel() . ':response:' . "\n";
             for ($i = 0; $i < strlen($r); $i++) {
                 $c = $r[$i];
@@ -207,9 +213,13 @@ class Game extends \Core\Module
                     echo $c;
                 } else {
                     echo '?[' . ord($c) . ']';
+                    $invalid++;
                 }
             }
             echo "\n";
+            if ($invalid > 0) {
+                echo 'HAS INVALID CHARACTERS: ' . $invalid . "\n";
+            }
         } else {
             echo $game->getId() . ':' . $game->getLabel() . ':response: No response' . "\n";
         }

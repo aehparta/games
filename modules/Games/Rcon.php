@@ -118,17 +118,24 @@ class Rcon
 
         stream_set_timeout($this->socket, 0, $this->timeout * 1e6);
 
-        $response = '';
+        $r = '';
         while ($buffer = fread($this->socket, 65536)) {
-            $response .= $buffer;
+            $r .= $buffer;
         }
 
         if ($raw) {
-            return $response;
+            return $r;
         }
 
-        $response = str_replace("\xff\xff\xff\xff" . $this->response_trim, '', $response);
-        $response = str_replace("\x00", '', $response);
+        $r = str_replace("\xff\xff\xff\xff" . $this->response_trim, '', $r);
+        
+        $response = '';
+        for ($i = 0; $i < strlen($r); $i++) {
+            $c = $r[$i];
+            if (ctype_space($c) || ctype_print($c)) {
+                $response .= $c;
+            }
+        }
 
         $response = trim($response);
         if (empty($response)) {

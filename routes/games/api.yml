@@ -17,6 +17,8 @@ game:
         method: getPlayerCount
       teams:
         method: getTeams
+      round:
+        method: getRoundStatus
       actions:
         kick:
           method: has
