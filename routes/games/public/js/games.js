@@ -27,7 +27,6 @@ if ($('#games').length) {
 			game: {
 				metadata: {}
 			},
-			teams: [],
 			vars: [],
 			maps: [],
 			players: [],
