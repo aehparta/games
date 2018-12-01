@@ -156,7 +156,10 @@
     </tbody>
   </table>
   <div v-if="game.teams" id="game-scoreboard" class="row">
-    <div id="game-scoreboard-score" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div id="game-scoreboard-map" class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      {{ game.map }}
+    </div>
+    <div id="game-scoreboard-score" class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
       <div class="row">
         <div v-for="team in game.teams">
           <div class="col-xs-6 col-sm-4 col-md-6 col-lg-5">
@@ -168,7 +171,7 @@
         </div>
       </div>
     </div>
-    <div id="game-scoreboard-round" v-if="game.round" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div id="game-scoreboard-round" v-if="game.round" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <div class="row">
           <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
             Round:
