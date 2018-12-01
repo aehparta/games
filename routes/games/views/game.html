@@ -112,10 +112,10 @@
         <th>
           Deaths
         </th>
-        <th>
+        <th v-if="game.teams">
           Team
         </th>
-        <th>
+        <th v-if="game.actions">
           Actions
         </th>
       </tr>
@@ -139,13 +139,13 @@
             {{ player.deaths }}
           </span>
         </td>
-        <td>
+        <td v-if="game.teams">
           <span class="game-player-team">
             {{ game.teams[player.team] ? game.teams[player.team].label : '' }}
           </span>
         </td>
-        <td>
-          <button :disabled="!player.alive" v-if="game.actions.kill" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
+        <td v-if="game.actions">
+          <button v-if="game.actions.kill" :disabled="player.alive == false" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
             kill
           </button>
           <button v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-sm btn-danger">
