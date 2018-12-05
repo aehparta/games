@@ -73,3 +73,7 @@
 #game-scoreboard-map {
   font-size: 32px;
 }
+
+.pointer {
+  cursor: pointer;
+}

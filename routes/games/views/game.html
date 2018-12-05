@@ -44,10 +44,12 @@
   <pre v-if="cmd.output" style="margin-top: 10px;">
     {{ cmd.output }}
   </pre>
-  <h2>
-    Status
+  <h2 class="pointer" v-on:click="statusToggle">
+    Config
+    <i v-if="show.status" class="fa fa-caret-right"></i>
+    <i v-else class="fa fa-caret-down"></i>
   </h2>
-  <table class="table table-striped table-hover">
+  <table v-if="show.status" class="table table-striped table-hover">
     <thead>
       <tr>
         <th>
@@ -97,14 +99,14 @@
       </tr>
     </tbody>
   </table>
-  <h3>
+  <h2>
     Players ({{ game.players }})
-  </h3>
+  </h2>
   <div v-if="game.teams" class="row">
     <div v-for="(team, team_id) in game.teams" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <h4>
+      <h3>
         {{ team.label }}
-      </h4>
+      </h3>
       <table class="table table-hover">
         <tbody>
           <tr v-for="player in players" v-if="player.team == team_id" class="game-player" v-bind:class="{ 'game-player-alive': player.alive }">
@@ -144,7 +146,7 @@
   </div>
   <table class="table table-hover">
     <tbody>
-      <tr v-for="player in players" v-if="game.teams ? !game.teams[player.team] : true" class="game-player" v-bind:class="{ 'game-player-alive': player.alive }">
+      <tr v-for="player in players" v-if="game.teams ? !game.teams[player.team] : true" class="game-player" v-bind:class="{ 'game-player-alive': player.alive != false }">
         <td>
           <img v-if="player.bot" class="game-player-face" src="/images/bot.jpg"/>
           <img v-else class="game-player-face" src="/images/face.jpg"/>
@@ -152,13 +154,13 @@
             {{ player.name }}
           </span>
           <div class="row">
-            <span class="game-player-score col-md-4">
+            <span v-if="player.score != null" class="game-player-score col-md-4">
               <label>
                 Score:
               </label>
               {{ player.score }}
             </span>
-            <span class="game-player-deaths col-md-4">
+            <span v-if="player.deaths != null" class="game-player-deaths col-md-4">
               <label>
                 Deaths:
               </label>

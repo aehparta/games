@@ -35,8 +35,14 @@ if ($('#games').length) {
 				output: null
 			},
 			timer: null,
+			show: {
+				status: false,
+			},
 		},
 		created: function() {
+			if (localStorage.showStatus === 'true') {
+				this.show.status = true;
+			}
 			this.id = window.location.pathname.replace(/\//g, '');
 			this.refresh();
 			setInterval(function() {
@@ -139,6 +145,10 @@ if ($('#games').length) {
 			},
 			kill: function(id) {
 				api.games.players.update(this.id, id, {});
+			},
+			statusToggle: function() {
+				app.show.status = !app.show.status;
+				localStorage.showStatus = app.show.status;
 			},
 		}
 	});
