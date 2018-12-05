@@ -79,7 +79,11 @@ class Game extends \Core\Module
 
     public function getPlayerCount()
     {
-        return count($this->getPlayers());
+        $players = $this->getPlayers();
+        if (is_array($players)) {
+            return count($players);
+        }
+        return null;
     }
 
     public function getPlayer($player_id)

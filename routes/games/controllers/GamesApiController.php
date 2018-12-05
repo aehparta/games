@@ -55,6 +55,9 @@ class GamesApiController extends \Core\Controller
     {
         $game    = \Games\Game::getGame($game_id);
         $players = $game->getPlayers();
+        if (!is_array($players)) {
+            return $this->render(null, null);
+        }
         $api     = new \API\API($this);
         $data    = $api->parse('game-players', $players);
         return $this->render(null, $data);

@@ -83,7 +83,7 @@ class CS extends \Games\Game
         if (isset($status['players'])) {
             return $status['players'];
         }
-        return array();
+        return null;
     }
 
     public function getTeams()
@@ -150,6 +150,9 @@ class CS extends \Games\Game
                 return self::$status;
             }
         }
+
+        self::$status = false;
+        return false;
 
         $r = $this->send('status');
         if (!$r) {

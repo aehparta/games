@@ -77,6 +77,9 @@ if ($('#games').length) {
 					});
 				}
 				api.games.players.read(this.id).done(function(data) {
+					if (!data.data) {
+						return;
+					}
 					data.data.sort(function(a, b) {
 						if (a.score > b.score) {
 							return -1;
