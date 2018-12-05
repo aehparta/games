@@ -8,7 +8,26 @@
 .game-player-face {
   width: 48px;
   height: 48px;
-  margin-right: 5px;
+  margin-right: 10px;
+  float: left;
+}
+
+.game-player-name {
+  display: block;
+  font-weight: 900;
+}
+
+.game-player-score,
+.game-player-deaths {
+  font-size: 16px;
+  color: #333;
+  font-weight: 700;
+}
+
+.game-player-score label,
+.game-player-deaths label {
+  color: #778;
+  font-weight: 300;
 }
 
 .game-player {
@@ -52,5 +71,5 @@
 }
 
 #game-scoreboard-map {
-	font-size: 32px;
+  font-size: 32px;
 }

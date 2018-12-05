@@ -128,7 +128,9 @@ class CS extends \Games\Game
             return self::$status;
         }
 
+        $this->setTimeout(0.2);
         $r = $this->send('amx_status');
+        $this->setTimeout();
         if ($r) {
             $r = json_decode($r, true);
             if (isset($r['players']) && isset($r['map']) && isset($r['hostname'])) {
@@ -146,7 +148,7 @@ class CS extends \Games\Game
                 foreach ($r['players'] as $p) {
                     self::$status['players'][] = new Player($p['name'], $p['score'], $p['bot'], $p);
                 }
-                $this->cacheSet($this->id . ':status', self::$status, 7);
+                $this->cacheSet($this->id . ':status', self::$status, 5);
                 return self::$status;
             }
         }

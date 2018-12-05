@@ -100,51 +100,73 @@
   <h3>
     Players ({{ game.players }})
   </h3>
+  <div v-if="game.teams" class="row">
+    <div v-for="(team, team_id) in game.teams" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h4>
+        {{ team.label }}
+      </h4>
+      <table class="table table-hover">
+        <tbody>
+          <tr v-for="player in players" v-if="player.team == team_id" class="game-player" v-bind:class="{ 'game-player-alive': player.alive }">
+            <td>
+              <img v-if="player.bot" class="game-player-face" src="/images/bot.jpg"/>
+              <img v-else class="game-player-face" src="/images/face.jpg"/>
+              <span class="game-player-name">
+                {{ player.name }}
+              </span>
+              <div class="row">
+                <span class="game-player-score col-md-4">
+                  <label>
+                    Score:
+                  </label>
+                  {{ player.score }}
+                </span>
+                <span class="game-player-deaths col-md-4">
+                  <label>
+                    Deaths:
+                  </label>
+                  {{ player.deaths }}
+                </span>
+              </div>
+            </td>
+            <td v-if="game.actions">
+              <button v-bind:title="'Kill ' + player.name" v-if="game.actions.kill" :disabled="player.alive == false" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
+                <i class="fa fa-skull-crossbones"></i>
+              </button>
+              <button v-bind:title="'Kick ' + player.name"  v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-sm btn-danger">
+                <i class="fa fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>
-          Player
-        </th>
-        <th>
-          Score
-        </th>
-        <th>
-          Deaths
-        </th>
-        <th v-if="game.teams">
-          Team
-        </th>
-        <th v-if="game.actions">
-          Actions
-        </th>
-      </tr>
-    </thead>
     <tbody>
-      <tr v-for="player in players" class="game-player" v-bind:class="{ 'game-player-alive': player.alive }">
+      <tr v-for="player in players" v-if="game.teams ? !game.teams[player.team] : true" class="game-player" v-bind:class="{ 'game-player-alive': player.alive }">
         <td>
           <img v-if="player.bot" class="game-player-face" src="/images/bot.jpg"/>
           <img v-else class="game-player-face" src="/images/face.jpg"/>
           <span class="game-player-name">
             {{ player.name }}
           </span>
+          <div class="row">
+            <span class="game-player-score col-md-4">
+              <label>
+                Score:
+              </label>
+              {{ player.score }}
+            </span>
+            <span class="game-player-deaths col-md-4">
+              <label>
+                Deaths:
+              </label>
+              {{ player.deaths }}
+            </span>
+          </div>
         </td>
-        <td>
-          <span class="game-player-score">
-            {{ player.score }}
-          </span>
-        </td>
-        <td>
-          <span class="game-player-deaths">
-            {{ player.deaths }}
-          </span>
-        </td>
-        <td v-if="game.teams">
-          <span class="game-player-team">
-            {{ game.teams[player.team] ? game.teams[player.team].label : '' }}
-          </span>
-        </td>
-        <td v-if="game.actions">
+        <td v-if="game.actions && !game.teams">
           <button v-bind:title="'Kill ' + player.name" v-if="game.actions.kill" :disabled="player.alive == false" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
             <i class="fa fa-skull-crossbones"></i>
           </button>
@@ -173,18 +195,18 @@
     </div>
     <div id="game-scoreboard-round" v-if="game.round" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <div class="row">
-          <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-            Round:
-          </div>
-          <div class="col-xs-6 col-sm-8 col-md-6 col-lg-8">
-            {{ game.round.round + 1 }}
-          </div>
-          <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-            Time left:
-          </div>
-          <div class="col-xs-6 col-sm-8 col-md-6 col-lg-8">
-            {{ (game.round.time.total - game.round.time.elapsed) | secondsFormat }}
-          </div>
+        <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+          Round:
+        </div>
+        <div class="col-xs-6 col-sm-8 col-md-6 col-lg-8">
+          {{ game.round.round + 1 }}
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+          Time left:
+        </div>
+        <div class="col-xs-6 col-sm-8 col-md-6 col-lg-8">
+          {{ (game.round.time.total - game.round.time.elapsed) | secondsFormat }}
+        </div>
       </div>
     </div>
   </div>
