@@ -145,11 +145,11 @@
           </span>
         </td>
         <td v-if="game.actions">
-          <button v-if="game.actions.kill" :disabled="player.alive == false" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
-            kill
+          <button v-bind:title="'Kill ' + player.name" v-if="game.actions.kill" :disabled="player.alive == false" v-on:click="kill(player.id)" class="btn btn-sm btn-warning">
+            <i class="fa fa-skull-crossbones"></i>
           </button>
-          <button v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-sm btn-danger">
-            kick
+          <button v-bind:title="'Kick ' + player.name"  v-if="game.actions.kick" v-on:click="kick(player.id)" class="btn btn-sm btn-danger">
+            <i class="fa fa-trash-alt"></i>
           </button>
         </td>
       </tr>
