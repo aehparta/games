@@ -156,7 +156,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "f47a5c059c71bb802e007c94e3d626cb1f46874a"
+                "reference": "ec7b2061eed3fe68e0b02d23522c01cfa456a3d7"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -187,7 +187,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-11-27T09:41:21+00:00"
+            "time": "2018-12-06T12:23:09+00:00"
         },
         {
             "name": "kehikko/route-account",
@@ -729,7 +729,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.19",
+            "version": "v3.4.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
