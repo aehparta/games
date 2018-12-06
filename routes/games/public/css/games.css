@@ -62,7 +62,7 @@
   right: 0px;
   left: 0px;
   padding: 5px;
-  padding-left: 50px;
+  padding-left: 10px;
   background: #000;
   opacity: 0.777;
   font-size: 18px;
@@ -79,6 +79,13 @@
 #map-next {
   display: block;
   font-size: 12px;
+}
+
+.map-thumb {
+  height: 55px;
+  padding-top: 5px;
+  padding-right: 10px;
+  filter: contrast(170%) grayscale(100%);
 }
 
 .pointer {

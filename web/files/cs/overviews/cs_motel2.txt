@@ -1,0 +1,13 @@
+
+global 
+{
+	ZOOM	2.51
+	ORIGIN	170.5 	-112.5	-28
+	ROTATED	1
+}
+
+layer 
+{
+	IMAGE	"overviews/cs_motel2.bmp"
+	HEIGHT	-377
+}
