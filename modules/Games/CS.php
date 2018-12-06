@@ -65,8 +65,8 @@ class CS extends \Games\Game
     public function getMap()
     {
         $status = $this->fetchStatus();
-        if (isset($status['map'])) {
-            return $status['map'];
+        if (isset($status['map']['current'])) {
+            return $status['map']['current'];
         }
         return null;
     }
@@ -75,6 +75,15 @@ class CS extends \Games\Game
     {
         $this->send('changelevel ' . $map);
         $this->cacheSet($this->id . ':status', null, 0);
+    }
+
+    public function getNextMap()
+    {
+        $status = $this->fetchStatus();
+        if (isset($status['map']['next'])) {
+            return $status['map']['next'];
+        }
+        return null;
     }
 
     public function getPlayers()
@@ -136,7 +145,7 @@ class CS extends \Games\Game
             if (isset($r['players']) && isset($r['map']) && isset($r['hostname'])) {
                 self::$status = array(
                     'hostname'  => $r['hostname'],
-                    'map'       => $r['map'],
+                    'map'       => array('current' => $r['map'], 'next' => $r['map_next']),
                     'players'   => array(),
                     'teams'     => array(
                         'TERRORIST' => array('label' => 'Terrorists', 'active' => true, 'score' => $r['score']['TERRORIST']),

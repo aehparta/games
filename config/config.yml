@@ -24,6 +24,7 @@ javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js
   - jquery.rest.min.js
   - vue.js
+  - vue-router.js
   - moment.min.js
   - common:*
   - games:*

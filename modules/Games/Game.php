@@ -62,6 +62,11 @@ class Game extends \Core\Module
         return false;
     }
 
+    public function getNextMap()
+    {
+        return false;
+    }
+
     public function getPlayers()
     {
         return array();

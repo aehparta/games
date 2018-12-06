@@ -1,3 +1,7 @@
+var router = new VueRouter({
+	mode: 'history',
+	routes: [],
+});
 if ($('#games').length) {
 	var app = new Vue({
 		el: '#games',
@@ -21,6 +25,7 @@ if ($('#games').length) {
 	});
 } else if ($('#game').length) {
 	var app = new Vue({
+		router,
 		el: '#game',
 		data: {
 			id: null,
@@ -36,10 +41,14 @@ if ($('#games').length) {
 			},
 			timer: null,
 			show: {
+				fullscreen: false,
 				status: false,
 			},
 		},
 		created: function() {
+			if (this.$route.query.fullscreen) {
+				this.show.fullscreen = true;
+			}
 			if (localStorage.showStatus === 'true') {
 				this.show.status = true;
 			}

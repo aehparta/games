@@ -12,7 +12,10 @@ game:
       up:
         method: isUp
       map:
-        method: getMap
+        current:
+          method: getMap
+        next:
+          method: getNextMap
       players:
         method: getPlayerCount
       teams:

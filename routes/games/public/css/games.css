@@ -68,10 +68,17 @@
   font-size: 18px;
   font-weight: 900;
   color: #a0c0a0;
+  height: 60px;
 }
 
-#game-scoreboard-map {
-  font-size: 32px;
+#map-current {
+  font-size: 28px;
+  top: -7px;
+}
+
+#map-next {
+  display: block;
+  font-size: 12px;
 }
 
 .pointer {
