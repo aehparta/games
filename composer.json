@@ -55,7 +55,6 @@
   }],
   "require": {
     "twig/twig": "^2.0",
-    "symfony/yaml": "^3.2",
     "mtdowling/cron-expression": "^1.1",
     "pear/console_commandline": "^1.2",
     "kehikko/kernel": "dev-master",
