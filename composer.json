@@ -56,7 +56,6 @@
   "require": {
     "twig/twig": "^2.0",
     "mtdowling/cron-expression": "^1.1",
-    "pear/console_commandline": "^1.2",
     "kehikko/kernel": "dev-master",
     "kehikko/core": "dev-master",
     "kehikko/route-common": "dev-master",

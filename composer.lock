@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "22c51b6526543bd0b7419fbd00876985",
+    "content-hash": "410192c6b114b85e3549652ff54d43f0",
     "packages": [
         {
             "name": "kehikko/account",
@@ -156,9 +156,10 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "270341db5e1a8d076619382562201de23b71038f"
+                "reference": "d60ab41ed6b42852bdf0adedb6598ad8e06495ba"
             },
             "require": {
+                "pear/console_commandline": "^1.2",
                 "php": ">=7.0.0",
                 "symfony/yaml": "^4.2"
             },
@@ -169,6 +170,7 @@
             "type": "library",
             "autoload": {
                 "files": [
+                    "autoload.php",
                     "tool.php",
                     "cfg.php",
                     "cache.php",
@@ -190,7 +192,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-12-07T14:30:36+00:00"
+            "time": "2018-12-08T13:54:46+00:00"
         },
         {
             "name": "kehikko/route-account",
