@@ -17,7 +17,7 @@ class Quake2 extends \Games\Game
 
     public function getMaps()
     {
-        $maps = $this->cacheGet($this->id . ':maps');
+        $maps = cache_get($this->id . ':maps');
         if ($maps) {
             return $maps;
         }
@@ -37,7 +37,7 @@ class Quake2 extends \Games\Game
 
         $maps = array_keys($maps);
         sort($maps, SORT_NATURAL | SORT_FLAG_CASE);
-        $this->cacheSet($this->id . ':maps', $maps);
+        cache_set($this->id . ':maps', $maps);
 
         return $maps;
     }

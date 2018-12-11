@@ -2,14 +2,13 @@
 
 namespace Games;
 
-class Game extends \Core\Module
+class Game
 {
     protected $id;
     protected $rcon;
 
     public function __construct($id)
     {
-        parent::__construct();
         $this->id   = $id;
         $host       = cfg('games:' . $id . ':host');
         $port       = cfg('games:' . $id . ':port');
@@ -129,7 +128,7 @@ class Game extends \Core\Module
 
     public function getVarValue($var_id)
     {
-        $v = $this->cacheGet($this->id . ':var:' . $var_id);
+        $v = cache_get($this->id . ':var:' . $var_id);
         if ($v !== null) {
             return $v;
         }
@@ -145,7 +144,7 @@ class Game extends \Core\Module
             return null;
         }
         $v = trim($matches[2], ' "');
-        $this->cacheSet($this->id . ':var:' . $var_id, $v, 30 + rand(0, 30));
+        cache_set($this->id . ':var:' . $var_id, $v, 30 + rand(0, 30));
         return $v;
     }
 
@@ -155,7 +154,7 @@ class Game extends \Core\Module
         if (cfg(array('games', $this->id, 'vars', $var_id, 'restart')) === true) {
             $this->restart();
         }
-        $this->cacheSet($this->id . ':var:' . $var_id, null, 0);
+        cache_set($this->id . ':var:' . $var_id, null, 0);
     }
 
     public function getVars()
@@ -203,7 +202,7 @@ class Game extends \Core\Module
         $games = self::getGames();
         echo "Games:\n";
         foreach ($games as $game) {
-            echo ' - ' . str_pad($game->getId(), 8) . ': ' . $game->getLabel() . ' (' . $game->getHost() . ':' . $game->getPort() . ")\n";
+            echo ' - ' . str_pad($game->getId(), 8) . ' ' . ($game->isUp() ? "\033[1;36mUP  \033[0m" : "\033[01;31mDOWN\033[0m") . ' : ' . $game->getLabel() . ' (' . $game->getHost() . ':' . $game->getPort() . ")\n";
         }
         return true;
     }

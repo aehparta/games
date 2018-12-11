@@ -34,7 +34,7 @@ class CS extends \Games\Game
 
     public function getMaps()
     {
-        $maps = $this->cacheGet($this->id . ':maps');
+        $maps = cache_get($this->id . ':maps');
         if ($maps) {
             return $maps;
         }
@@ -57,7 +57,7 @@ class CS extends \Games\Game
 
         $maps = array_keys($maps);
         sort($maps, SORT_NATURAL | SORT_FLAG_CASE);
-        $this->cacheSet($this->id . ':maps', $maps);
+        cache_set($this->id . ':maps', $maps);
 
         return $maps;
     }
@@ -74,7 +74,7 @@ class CS extends \Games\Game
     public function setMap(string $map)
     {
         $this->send('changelevel ' . $map);
-        $this->cacheSet($this->id . ':status', null, 0);
+        cache_set($this->id . ':status', null, 0);
     }
 
     public function getNextMap()
@@ -116,18 +116,18 @@ class CS extends \Games\Game
     public function kickPlayer($player_id)
     {
         $this->send('kick "' . $player_id . '"');
-        $this->cacheSet($this->id . ':status', null, 0);
+        cache_set($this->id . ':status', null, 0);
     }
 
     public function killPlayer($player_id)
     {
         $this->send('amx_slay "' . $player_id . '"');
-        $this->cacheSet($this->id . ':status', null, 0);
+        cache_set($this->id . ':status', null, 0);
     }
 
     private function fetchStatus()
     {
-        $status = $this->cacheGet($this->id . ':status');
+        $status = cache_get($this->id . ':status');
         if ($status) {
             self::$status = $status;
             return self::$status;
@@ -157,7 +157,7 @@ class CS extends \Games\Game
                 foreach ($r['players'] as $p) {
                     self::$status['players'][] = new Player($p['name'], $p['score'], $p['bot'], $p);
                 }
-                $this->cacheSet($this->id . ':status', self::$status, 5);
+                cache_set($this->id . ':status', self::$status, 5);
                 return self::$status;
             }
         }
@@ -196,7 +196,7 @@ class CS extends \Games\Game
             self::$status['players'][] = new Player($matches[1], $matches[3], 0, $matches[2] === 'BOT');
         }
 
-        $this->cacheSet($this->id . ':status', self::$status, 7);
+        cache_set($this->id . ':status', self::$status, 7);
 
         return self::$status;
     }

@@ -80,7 +80,7 @@ class Rcon
             $this->errstr,
             $this->timeout);
         if (!$this->socket) {
-            \kernel::log(LOG_ERR, 'could not connect to host ' . $this->host . ' on port ' . $this->port);
+            log_notice('could not connect to host ' . $this->host . ' on port ' . $this->port);
             return false;
         }
         return true;
@@ -112,7 +112,7 @@ class Rcon
     public function read($raw = false)
     {
         if (is_null($this->socket)) {
-            \kernel::log(LOG_ERR, 'could not read response: UDP socket is NULL');
+            log_err('could not read response: UDP socket is NULL');
             return false;
         }
 
@@ -156,7 +156,7 @@ class Rcon
     private function write($command, $no_prefix = false)
     {
         if (is_null($this->socket)) {
-            \kernel::log(LOG_ERR, 'could not send command ' . $command . ': UDP socket is NULL');
+            log_err('could not send command ' . $command . ': UDP socket is NULL');
             return false;
         }
         $data = ($no_prefix ? '' : $this->prefix) . $command . "\n";
@@ -189,9 +189,9 @@ class Rcon
         $rcon = new self($args['host'], $args['port'], $args['password']);
         $r    = $rcon->send($args['command']);
         if ($r) {
-            \kernel::log(LOG_INFO, 'rcon:' . $args['command'] . ":\n" . $r . "\n");
+            log_info('rcon:' . $args['command'] . ":\n" . $r . "\n");
         } else {
-            \kernel::log(LOG_INFO, 'rcon:' . $args['command'] . ': no response' . "\n");
+            log_info('rcon:' . $args['command'] . ': no response' . "\n");
         }
     }
 
