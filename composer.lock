@@ -156,7 +156,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/http.git",
-                "reference": "51751f50c922dabb7817b229c0dd5aa3818113c5"
+                "reference": "807e79b3d8c8dea50d4747be76306447c327c9b9"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -166,7 +166,8 @@
                 "files": [
                     "route.php",
                     "render.php",
-                    "http.php"
+                    "http.php",
+                    "api.php"
                 ]
             },
             "license": [
@@ -179,7 +180,7 @@
                 }
             ],
             "description": "Http request handling for kehikko framework",
-            "time": "2018-12-11T14:06:45+00:00"
+            "time": "2018-12-11T20:50:08+00:00"
         },
         {
             "name": "kehikko/kernel",
@@ -187,7 +188,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "e34824fda7525060032f094282bef27cea0b49d5"
+                "reference": "2398fdd0eb446f3d45706755889803a05f8ff570"
             },
             "require": {
                 "pear/console_commandline": "^1.2",
@@ -221,7 +222,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-12-11T14:07:07+00:00"
+            "time": "2018-12-11T20:50:48+00:00"
         },
         {
             "name": "kehikko/route-account",
