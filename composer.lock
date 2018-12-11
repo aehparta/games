@@ -156,7 +156,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/http.git",
-                "reference": "0562c93099320e2d32f2cc24d82ad73f0bca8f0f"
+                "reference": "a55f297f42930e7e5294a926538d19a063585efc"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -179,7 +179,7 @@
                 }
             ],
             "description": "Http request handling for kehikko framework",
-            "time": "2018-12-10T19:06:08+00:00"
+            "time": "2018-12-11T08:11:50+00:00"
         },
         {
             "name": "kehikko/kernel",
