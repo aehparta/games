@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "410192c6b114b85e3549652ff54d43f0",
+    "content-hash": "829c515fed5ce29d7cc8497decd5f061",
     "packages": [
         {
             "name": "kehikko/account",
@@ -151,12 +151,43 @@
             "time": "2018-11-21T15:14:51+00:00"
         },
         {
+            "name": "kehikko/http",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kehikko/http.git",
+                "reference": "0562c93099320e2d32f2cc24d82ad73f0bca8f0f"
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "route.php",
+                    "render.php",
+                    "http.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antti Partanen",
+                    "email": "aehparta@iki.fi"
+                }
+            ],
+            "description": "Http request handling for kehikko framework",
+            "time": "2018-12-10T19:06:08+00:00"
+        },
+        {
             "name": "kehikko/kernel",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "d60ab41ed6b42852bdf0adedb6598ad8e06495ba"
+                "reference": "a6c221b3e83f38648b610cb54fcab32910fcf182"
             },
             "require": {
                 "pear/console_commandline": "^1.2",
@@ -171,6 +202,7 @@
             "autoload": {
                 "files": [
                     "autoload.php",
+                    "error.php",
                     "tool.php",
                     "cfg.php",
                     "cache.php",
@@ -192,7 +224,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-12-08T13:54:46+00:00"
+            "time": "2018-12-10T19:06:28+00:00"
         },
         {
             "name": "kehikko/route-account",
@@ -268,6 +300,36 @@
             ],
             "description": "Common UI features for kehikko framework",
             "time": "2018-11-22T14:35:57+00:00"
+        },
+        {
+            "name": "kehikko/twig",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kehikko/twig.git",
+                "reference": "ee71402bdda3f32f2c2f8b489e3c1e6424b5fcf2"
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "twig/twig": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "twig.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antti Partanen",
+                    "email": "aehparta@iki.fi"
+                }
+            ],
+            "description": "Twig templating helper for kehikko framework",
+            "time": "2018-12-10T19:05:46+00:00"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -867,7 +929,9 @@
         "kehikko/core": 20,
         "kehikko/route-common": 20,
         "kehikko/account": 20,
-        "kehikko/route-account": 20
+        "kehikko/route-account": 20,
+        "kehikko/http": 20,
+        "kehikko/twig": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

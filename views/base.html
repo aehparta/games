@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="/images/favicon.png"/>
     {% block head %}
     <title>
-      {% block title %}{{ tr('title/site') }}{% endblock %}
+      {% block title %}{{ t('title:site') }}{% endblock %}
     </title>
     {% endblock %}
     {% block css %}
@@ -21,7 +21,6 @@
     {% endblock %}
     {% block container %}
     <div class="container">
-      {% include 'messages.html' %}
       {% block content %}
       {% endblock %}
     </div>

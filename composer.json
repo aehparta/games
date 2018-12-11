@@ -52,6 +52,12 @@
   }, {
     "url": "https://github.com/kehikko/route-api.git",
     "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/http.git",
+    "type": "git"
+  }, {
+    "url": "https://github.com/kehikko/twig.git",
+    "type": "git"
   }],
   "require": {
     "twig/twig": "^2.0",
@@ -63,6 +69,8 @@
     "phpfastcache/phpfastcache": "^7.0",
     "kehikko/account": "dev-master",
     "kehikko/route-account": "dev-master",
-    "kehikko/route-admin": "^1.1"
+    "kehikko/route-admin": "^1.1",
+    "kehikko/http": "dev-master",
+    "kehikko/twig": "dev-master"
   }
 }
