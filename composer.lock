@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "829c515fed5ce29d7cc8497decd5f061",
+    "content-hash": "fc89b4f57a26291af2ed80a915a85aa8",
     "packages": [
         {
             "name": "kehikko/account",

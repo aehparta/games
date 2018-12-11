@@ -60,7 +60,6 @@
     "type": "git"
   }],
   "require": {
-    "twig/twig": "^2.0",
     "mtdowling/cron-expression": "^1.1",
     "kehikko/kernel": "dev-master",
     "kehikko/core": "dev-master",
