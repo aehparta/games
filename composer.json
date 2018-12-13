@@ -58,6 +58,9 @@
   }, {
     "url": "https://github.com/kehikko/twig.git",
     "type": "git"
+  }, {
+    "url": "git@github.com:kehikko/profiler.git",
+    "type": "git"
   }],
   "require": {
     "mtdowling/cron-expression": "^1.1",
@@ -70,6 +73,7 @@
     "kehikko/route-account": "dev-master",
     "kehikko/route-admin": "^1.1",
     "kehikko/http": "dev-master",
-    "kehikko/twig": "dev-master"
+    "kehikko/twig": "dev-master",
+    "kehikko/profiler": "dev-master"
   }
 }

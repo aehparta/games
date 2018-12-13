@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc89b4f57a26291af2ed80a915a85aa8",
+    "content-hash": "d61df029b7fc24fee26a8d7b17d8a91a",
     "packages": [
         {
             "name": "kehikko/account",
@@ -223,6 +223,35 @@
             ],
             "description": "Kernel for kehikko framework",
             "time": "2018-12-13T13:53:08+00:00"
+        },
+        {
+            "name": "kehikko/profiler",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:kehikko/profiler.git",
+                "reference": "210358d5ae59ba6dd6dd0b330d5c381101c3964c"
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "profiler.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antti Partanen",
+                    "email": "aehparta@iki.fi"
+                }
+            ],
+            "description": "Profiling for kehikko framework",
+            "time": "2018-12-13T14:27:49+00:00"
         },
         {
             "name": "kehikko/route-account",
@@ -929,7 +958,8 @@
         "kehikko/account": 20,
         "kehikko/route-account": 20,
         "kehikko/http": 20,
-        "kehikko/twig": 20
+        "kehikko/twig": 20,
+        "kehikko/profiler": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
