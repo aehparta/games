@@ -4,8 +4,8 @@ namespace Games;
 
 class CS extends \Games\Game
 {
-    private static $status = null;
-    private static $challenge;
+    private $status = null;
+    private $challenge;
 
     public function __construct($id)
     {
@@ -16,7 +16,7 @@ class CS extends \Games\Game
         if (isset($matches[1])) {
             $this->rcon->setPrefix(str_repeat(chr(255), 4) . 'rcon ' . $matches[1] . ' ' . $this->rcon->getPassword() . ' ');
         } else {
-            self::$status = false;
+            $this->status = false;
         }
         $this->rcon->setResponseTrim('l');
     }
@@ -24,7 +24,7 @@ class CS extends \Games\Game
     public function getLabel()
     {
         $status = $this->fetchStatus();
-        return isset(self::$status['hostname']) ? self::$status['hostname'] : parent::getLabel();
+        return isset($status['hostname']) ? $status['hostname'] : parent::getLabel();
     }
 
     public function isUp()
@@ -127,15 +127,15 @@ class CS extends \Games\Game
 
     private function fetchStatus()
     {
+        if ($this->status !== null) {
+            return $this->status;
+        }
+
         $status = cache()->get($this->id . '.status');
         if ($status) {
             log_verbose('Status from cache');
-            self::$status = $status;
-            return self::$status;
-        }
-
-        if (self::$status !== null) {
-            return self::$status;
+            $this->status = $status;
+            return $this->status;
         }
 
         $this->setTimeout(0.2);
@@ -144,7 +144,7 @@ class CS extends \Games\Game
         if ($r) {
             $r = json_decode($r, true);
             if (isset($r['players']) && isset($r['map']) && isset($r['hostname'])) {
-                self::$status = array(
+                $this->status = array(
                     'hostname'  => $r['hostname'],
                     'map'       => array('current' => $r['map'], 'next' => $r['map_next']),
                     'players'   => array(),
@@ -156,49 +156,15 @@ class CS extends \Games\Game
                     'round'     => $r['round'],
                 );
                 foreach ($r['players'] as $p) {
-                    self::$status['players'][] = new Player($p['name'], $p['score'], $p['bot'], $p);
+                    $this->status['players'][] = new Player($p['name'], $p['score'], $p['bot'], $p);
                 }
-                cache()->set($this->id . '.status', self::$status, 5);
-                return self::$status;
+                cache()->set($this->id . '.status', $this->status, 5);
+                return $this->status;
             }
         }
 
-        self::$status = false;
+        $this->status = false;
+        log_verbose('Failed fetching CS server status');
         return false;
-
-        $r = $this->send('status');
-        if (!$r) {
-            self::$status = false;
-            return false;
-        }
-
-        self::$status = array('hostname' => null, 'map' => null, 'players' => array());
-        $lines        = explode("\n", $r);
-        if (count($lines) < 4) {
-            self::$status = false;
-            return false;
-        }
-
-        /* parse hostname */
-        preg_match('/[\s]*hostname[\s]*:[\s]*([^\n]+)/', $lines[0], $hostname);
-        self::$status['hostname'] = trim($hostname[1]);
-
-        /* parse current map */
-        preg_match('/map[\s]*:[\s]*([^\s]+)/', $lines[3], $map);
-        self::$status['map'] = $map[1];
-
-        /* parse players */
-        foreach (array_slice($lines, 7) as $p) {
-            $matches = array();
-            preg_match('/[#0-9\s]+"([^"]+)"[\s]+[0-9]+[\s]+([^\s]+)[\s]+([0-9]+)/', trim($p), $matches);
-            if (count($matches) != 4) {
-                continue;
-            }
-            self::$status['players'][] = new Player($matches[1], $matches[3], 0, $matches[2] === 'BOT');
-        }
-
-        cache()->set($this->id . '.status', self::$status, 7);
-
-        return self::$status;
     }
 }

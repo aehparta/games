@@ -1,8 +1,7 @@
 commands:
   rcon:cmd:
     description: send rcon command to remote server
-    class: \Games\Rcon
-    method: cmd
+    call: \Games\Rcon@cmd
     arguments:
       host:
         description: host
@@ -14,8 +13,7 @@ commands:
         description: command to send
   server:udp:
     description: start listening server on local address and port
-    class: \Games\Server
-    method: serve
+    call: \Games\Server@serve
     arguments:
       address:
         description: local ip
@@ -23,12 +21,10 @@ commands:
         description: port
   list:
     description: list enabled games
-    class: \Games\Game
-    method: cmdGamesList
+    call: \Games\Game@cmdGamesList
   cmd:
     description: send rcon command to specified game server
-    class: \Games\Game
-    method: cmd
+    call: \Games\Game@cmd
     arguments:
       game:
         description: game id

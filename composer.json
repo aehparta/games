@@ -74,6 +74,7 @@
     "kehikko/route-admin": "^1.1",
     "kehikko/http": "dev-master",
     "kehikko/twig": "dev-master",
-    "kehikko/profiler": "dev-master"
+    "kehikko/profiler": "dev-master",
+    "symfony/cache": "^4.2"
   }
 }
