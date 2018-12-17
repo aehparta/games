@@ -156,7 +156,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/http.git",
-                "reference": "22a6aada701e63550ddcc29d55459b446b338bbc"
+                "reference": "5bfb231e101dfe46099e20a7d684e5e79f712941"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -180,7 +180,7 @@
                 }
             ],
             "description": "Http request handling for kehikko framework",
-            "time": "2018-12-13T13:53:31+00:00"
+            "time": "2018-12-17T06:29:09+00:00"
         },
         {
             "name": "kehikko/kernel",
@@ -188,7 +188,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "7b55186df9593c55df4d303377df568943a553d8"
+                "reference": "a286ded8155b85e1c753f051dc991fdb1c39ac2c"
             },
             "require": {
                 "pear/console_commandline": "^1.2",
@@ -222,7 +222,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-12-13T13:53:08+00:00"
+            "time": "2018-12-17T14:32:11+00:00"
         },
         {
             "name": "kehikko/profiler",
@@ -230,10 +230,11 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:kehikko/profiler.git",
-                "reference": "210358d5ae59ba6dd6dd0b330d5c381101c3964c"
+                "reference": "6eee0c84678512609fbb413793571a8ded904bbd"
             },
             "require": {
-                "php": ">=7.0.0"
+                "php": ">=7.0.0",
+                "twig/twig": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -251,7 +252,7 @@
                 }
             ],
             "description": "Profiling for kehikko framework",
-            "time": "2018-12-13T14:27:49+00:00"
+            "time": "2018-12-16T09:48:58+00:00"
         },
         {
             "name": "kehikko/route-account",
@@ -334,7 +335,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/twig.git",
-                "reference": "ee71402bdda3f32f2c2f8b489e3c1e6424b5fcf2"
+                "reference": "c5d24065d446447b2cb8b9c44c8e54ed1ed3b7e3"
             },
             "require": {
                 "php": ">=7.0.0",
@@ -356,7 +357,7 @@
                 }
             ],
             "description": "Twig templating helper for kehikko framework",
-            "time": "2018-12-10T19:05:46+00:00"
+            "time": "2018-12-17T06:30:15+00:00"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -882,32 +883,32 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.5.0",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "6a5f676b77a90823c2d4eaf76137b771adf31323"
+                "reference": "a11dd39f5b6589e14f0ff3b36675d06047c589b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6a5f676b77a90823c2d4eaf76137b771adf31323",
-                "reference": "6a5f676b77a90823c2d4eaf76137b771adf31323",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a11dd39f5b6589e14f0ff3b36675d06047c589b1",
+                "reference": "a11dd39f5b6589e14f0ff3b36675d06047c589b1",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
                 "symfony/polyfill-ctype": "^1.8",
-                "symfony/polyfill-mbstring": "~1.0"
+                "symfony/polyfill-mbstring": "^1.3"
             },
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.3"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "2.6-dev"
                 }
             },
             "autoload": {
@@ -945,7 +946,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-07-13T07:18:09+00:00"
+            "time": "2018-12-16T10:36:48+00:00"
         }
     ],
     "packages-dev": [],
