@@ -80,7 +80,7 @@ class Rcon
             $this->errstr,
             $this->timeout);
         if (!$this->socket) {
-            log_notice('could not connect to host ' . $this->host . ' on port ' . $this->port);
+            log_verbose('could not connect to host ' . $this->host . ' on port ' . $this->port);
             return false;
         }
         return true;
