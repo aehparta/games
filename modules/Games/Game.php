@@ -128,7 +128,7 @@ class Game
 
     public function getVarValue($var_id)
     {
-        $v = cache_get($this->id . ':var:' . $var_id);
+        $v = cache()->get($this->id . '.var.' . $var_id);
         if ($v !== null) {
             return $v;
         }
@@ -144,7 +144,7 @@ class Game
             return null;
         }
         $v = trim($matches[2], ' "');
-        cache_set($this->id . ':var:' . $var_id, $v, 30 + rand(0, 30));
+        cache()->set($this->id . '.var.' . $var_id, $v, 30 + rand(0, 30));
         return $v;
     }
 
@@ -154,7 +154,7 @@ class Game
         if (cfg(array('games', $this->id, 'vars', $var_id, 'restart')) === true) {
             $this->restart();
         }
-        cache_set($this->id . ':var:' . $var_id, null, 0);
+        cache()->set($this->id . '.var.' . $var_id, null, 0);
     }
 
     public function getVars()

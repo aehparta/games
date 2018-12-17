@@ -3,6 +3,7 @@ web/.htaccess
 *.sublime-workspace
 log/*
 tmp/*
+cache/*
 kehikko
 kehikko.php
 routes/common
