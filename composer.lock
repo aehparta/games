@@ -156,7 +156,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/http.git",
-                "reference": "5bfb231e101dfe46099e20a7d684e5e79f712941"
+                "reference": "85511801a1283314445a173635a9e0336fd6d9a7"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -180,7 +180,7 @@
                 }
             ],
             "description": "Http request handling for kehikko framework",
-            "time": "2018-12-17T06:29:09+00:00"
+            "time": "2018-12-17T18:28:51+00:00"
         },
         {
             "name": "kehikko/kernel",
@@ -188,7 +188,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "a286ded8155b85e1c753f051dc991fdb1c39ac2c"
+                "reference": "308549269bd363ae8e5d6dbb6a170cbd78a2f2c4"
             },
             "require": {
                 "pear/console_commandline": "^1.2",
@@ -222,7 +222,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-12-17T14:32:11+00:00"
+            "time": "2018-12-17T18:29:17+00:00"
         },
         {
             "name": "kehikko/profiler",
