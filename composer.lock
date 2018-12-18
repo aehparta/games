@@ -188,12 +188,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/kernel.git",
-                "reference": "308549269bd363ae8e5d6dbb6a170cbd78a2f2c4"
+                "reference": "e5259af8265ff4d2c3cf030b709400dfee830571"
             },
             "require": {
                 "pear/console_commandline": "^1.2",
                 "php": ">=7.0.0",
                 "symfony/yaml": "^4.2"
+            },
+            "suggest": {
+                "phpfastcache/phpfastcache": "Has support for PSR-16 caching",
+                "symfony/cache": "Has support for PSR-16 caching"
             },
             "bin": [
                 "kehikko",
@@ -222,7 +226,7 @@
                 }
             ],
             "description": "Kernel for kehikko framework",
-            "time": "2018-12-17T18:29:17+00:00"
+            "time": "2018-12-18T10:47:16+00:00"
         },
         {
             "name": "kehikko/profiler",
