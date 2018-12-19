@@ -44,17 +44,11 @@
         },
         {
             "name": "kehikko/api",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/API.git",
-                "reference": "b28c49ae94a5bf40eaddaec65d45efe957fb2037"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kehikko/API/zipball/b28c49ae94a5bf40eaddaec65d45efe957fb2037",
-                "reference": "b28c49ae94a5bf40eaddaec65d45efe957fb2037",
-                "shasum": ""
+                "reference": "7e33c167a9fdbfef2a4dddb68b793526231a70e9"
             },
             "require": {
                 "php": ">=7.0.0"
@@ -65,7 +59,6 @@
                     "API\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -76,7 +69,7 @@
                 }
             ],
             "description": "Kehikko framework API handler",
-            "time": "2018-09-19T12:53:29+00:00"
+            "time": "2018-12-18T14:01:09+00:00"
         },
         {
             "name": "kehikko/composer",

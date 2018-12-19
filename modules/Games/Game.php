@@ -10,9 +10,9 @@ class Game
     public function __construct($id)
     {
         $this->id   = $id;
-        $host       = cfg('games:' . $id . ':host');
-        $port       = cfg('games:' . $id . ':port');
-        $password   = cfg('games:' . $id . ':password');
+        $host       = cfg('games.' . $id . '.host');
+        $port       = cfg('games.' . $id . '.port');
+        $password   = cfg('games.' . $id . '.password');
         $this->rcon = new \Games\Rcon($host, $port, $password);
     }
 
@@ -43,7 +43,7 @@ class Game
 
     public function getLabel()
     {
-        return cfg('games:' . $this->id . ':label', $this->getId());
+        return cfg('games.' . $this->id . '.label', $this->getId());
     }
 
     public function getMaps()
@@ -108,7 +108,7 @@ class Game
 
     public function getMetadata()
     {
-        return cfg('games:' . $this->id . ':metadata', array());
+        return cfg('games.' . $this->id . '.metadata', array());
     }
 
     public function send($command)
@@ -118,7 +118,7 @@ class Game
 
     public function getVar($var_id)
     {
-        $var = cfg('games:' . $this->id . ':vars:' . $var_id);
+        $var = cfg('games.' . $this->id . '.vars.' . $var_id);
         if (!$var) {
             return null;
         }
