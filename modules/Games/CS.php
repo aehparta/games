@@ -167,4 +167,103 @@ class CS extends \Games\Game
         log_verbose('Failed fetching CS server status');
         return false;
     }
+
+    public static function parseLogs($cmd, $args, $options)
+    {
+        $path = cfg(['games', $args['game'], 'logs', 'path']);
+        if (!is_dir($path)) {
+            log_error('Unable to parse cs 1.6 logs, log path is invalid: ' . $path);
+            return false;
+        }
+
+        /* get time of last record */
+        $last = em()->getRepository('Games\Stat')->findBy(array('game' => $args['game']), array('time' => 'DESC'), 1, 0);
+        if (!empty($last)) {
+            $last = array_pop($last);
+            $last = $last->getTime();
+        } else {
+            $last = new \DateTime('1990-01-01');
+        }
+        /* save (current time minus few minutes) to be used later */
+        $older_than = new \DateTime('-5 minutes');
+
+        $logs = scandir($path, SCANDIR_SORT_ASCENDING);
+        foreach ($logs as $log) {
+            /* if log file modification time is older than last entry, this is not a log file we want to read */
+            if ($log[0] == '.' || $last > date_create('@' . filemtime($path . '/' . $log))) {
+                continue;
+            }
+            log_info('Parsing file ' . $path . '/' . $log . ' as it seems newer than last stat entry in database');
+            /* open log file and start parsing */
+            $f = fopen($path . '/' . $log, 'r');
+            while (($line = fgets($f)) !== false) {
+                /* reset variables */
+                $matches = [];
+                $action  = null;
+                $tool    = null;
+                $p_src   = ['id' => null, 'name' => null, 'team' => null, 'bot' => true];
+                $p_dst   = ['id' => null, 'name' => null, 'team' => null, 'bot' => true];
+                /* pattern for someone killed someone */
+                $pkilled = '@L ([0-9]+\/[0-9]+\/[0-9]+ - [0-9]+:[0-9]+:[0-9]+): "([^<]+)<[0-9]+><([^>]+)><([A-Z]+)>" killed "([^<]+)<[0-9]+><([^>]+)><([A-Z]+)>" with "([0-9-a-z]+)"@';
+                /* suicide */
+                $psuicide = '@L ([0-9]+\/[0-9]+\/[0-9]+ - [0-9]+:[0-9]+:[0-9]+): "([^<]+)<[0-9]+><([^>]+)><([A-Z]+)>" committed suicide with "([0-9-a-z]+)"@';
+                /* someone planted the bomb */
+                $pplanted = '@L ([0-9]+\/[0-9]+\/[0-9]+ - [0-9]+:[0-9]+:[0-9]+): "([^<]+)<[0-9]+><([^>]+)><([A-Z]+)>" triggered "Planted_The_Bomb"@';
+                /* someone defused the bomb */
+                $pdefused = '@L ([0-9]+\/[0-9]+\/[0-9]+ - [0-9]+:[0-9]+:[0-9]+): "([^<]+)<[0-9]+><([^>]+)><([A-Z]+)>" triggered "Defused_The_Bomb"@';
+                /* try to match some of the patterns */
+                if (preg_match($pkilled, $line, $matches)) {
+                    /* this was a kill */
+                    $action = 'kill';
+                    $tool   = $matches[8];
+                    $p_src  = ['id' => $matches[3], 'name' => $matches[2], 'team' => $matches[4], 'bot' => $matches[3] == 'BOT'];
+                    $p_dst  = ['id' => $matches[6], 'name' => $matches[5], 'team' => $matches[7], 'bot' => $matches[6] == 'BOT'];
+                } else if (preg_match($psuicide, $line, $matches)) {
+                    /* suicide */
+                    $action = 'kill';
+                    $tool   = $matches[4];
+                    $p_src  = ['id' => $matches[3], 'name' => $matches[2], 'team' => $matches[4], 'bot' => $matches[3] == 'BOT'];
+                } else if (preg_match($pplanted, $line, $matches)) {
+                    /* this was a plantation */
+                    $action = 'bomb planted';
+                    $p_src  = ['id' => $matches[3], 'name' => $matches[2], 'team' => $matches[4], 'bot' => $matches[3] == 'BOT'];
+                } else if (preg_match($pdefused, $line, $matches)) {
+                    /* this was a defusion */
+                    $action = 'bomb defused';
+                    $p_src  = ['id' => $matches[3], 'name' => $matches[2], 'team' => $matches[4], 'bot' => $matches[3] == 'BOT'];
+                } else {
+                    /* missed match */
+                    continue;
+                }
+                /* time comes always from the same location */
+                $time = new \DateTime(str_replace('-', ' ', $matches[1]));
+                /* check that last entry found from database is older than this one */
+                if ($last >= $time) {
+                    continue;
+                }
+                /* check that we only parse entries that are little bit in the past so every record is already written
+                 * this is because hlds server writes entries in log bit slowly and does not flush output buffer "properly"
+                 */
+                if ($time >= $older_than) {
+                    continue;
+                }
+                /* get players */
+                $p_src = $p_src['id'] !== null ? Player::findOrCreate($p_src['id'], $p_src['name'], $p_src['bot']) : null;
+                $p_dst = $p_dst['id'] !== null ? Player::findOrCreate($p_dst['id'], $p_dst['name'], $p_dst['bot']) : null;
+                /* new entry in database */
+                $stat = new Stat();
+                $stat->setGame($args['game']);
+                $stat->setTime($time);
+                $stat->setAction($action);
+                $stat->setPlayerSrc($p_src);
+                $stat->setPlayerDst($p_dst);
+                $stat->setTool($tool);
+                em()->persist($stat);
+            }
+            fclose($f);
+            em()->flush();
+        }
+
+        return true;
+    }
 }

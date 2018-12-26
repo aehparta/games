@@ -61,12 +61,12 @@
 #   method: post
 #   history: false
 
-index:
-  pattern: '/'
-  controller: Games
-  action: index
+# index:
+#   pattern: '/'
+#   controller: Games
+#   action: index
 
-game:
-  pattern: '/{game_id}'
-  controller: Games
-  action: game
+# game:
+#   pattern: '/{game_id}'
+#   controller: Games
+#   action: game

@@ -35,3 +35,10 @@ commands:
         short_name: -t
         long_name: --timeout
         description: query timeout
+  cs1.6:parse:logs:
+    description: parse counter-strike 1.6 logs
+    call: Games\CS@parseLogs
+    arguments:
+      game:
+        description: game id
+

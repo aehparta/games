@@ -1,0 +1,30 @@
+Games\Stat:
+  type: entity
+  table: stats
+  indexes:
+    action:
+      columns:
+        - action
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    game:
+      type: string
+      nullable: false
+    time:
+      type: datetime
+      nullable: false
+    action:
+      type: string
+      nullable: false
+    tool:
+      type: string
+      nullable: true
+  manyToOne:
+    player_src:
+      targetEntity: Games\Player
+    player_dst:
+      targetEntity: Games\Player

@@ -3,4 +3,15 @@ common:
   pattern: /common
 
 games:
+  pattern: /api/games/{=call:Games\Game@getGame|=call:Games\Game@getGames}
+  call: Games\ApiController@games
+  format: json
+
+# game:
+#   pattern: /api/games/{=call:Games\Game@getGame}
+#   call: Games\ApiController@game
+#   format: json
+
+index:
   pattern: /
+  call: Games\GamesController@index

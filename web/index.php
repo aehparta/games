@@ -5,8 +5,4 @@ ini_set('display_errors', 1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// echo "<pre>";
-// var_dump(route_init());
-// exit;
-
 route_execute();

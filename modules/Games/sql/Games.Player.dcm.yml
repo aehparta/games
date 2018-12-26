@@ -1,0 +1,11 @@
+Games\Player:
+  type: entity
+  table: players
+  id:
+    id:
+      type: string
+  fields:
+    name:
+      type: string
+    bot:
+      type: boolean

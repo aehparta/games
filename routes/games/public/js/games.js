@@ -15,7 +15,7 @@ if ($('#games').length) {
 			refresh: function() {
 				api.games.read().done(function(data) {
 					app.games.length = 0;
-					data.data.forEach(function(e) {
+					data.forEach(function(e) {
 						app.games.push(e);
 					});
 				});
@@ -69,33 +69,33 @@ if ($('#games').length) {
 		methods: {
 			refresh: function() {
 				api.games.read(this.id).done(function(data) {
-					if (data.data.metadata.actions) {
-						Object.keys(data.data.metadata.actions).forEach(function(key) {
-							data.data.metadata.actions[key].sending = false;
+					if (data.metadata.actions) {
+						Object.keys(data.metadata.actions).forEach(function(key) {
+							data.metadata.actions[key].sending = false;
 						});
 					}
 					var t = null;
 					if (app.game.round) {
 						t = app.game.round.time.elapsed;
-						if (app.game.round.time.elapsed < data.data.round.time.elapsed || Math.abs(app.game.round.time.elapsed - data.data.round.time.elapsed) > 10) {
-							t = data.data.round.time.elapsed;
+						if (app.game.round.time.elapsed < data.round.time.elapsed || Math.abs(app.game.round.time.elapsed - data.round.time.elapsed) > 10) {
+							t = data.round.time.elapsed;
 						}
 					}
-					app.game = Object.assign({}, app.game, data.data);
+					app.game = Object.assign({}, app.game, data);
 					if (app.game.round && t !== null) {
 						app.game.round.time.elapsed = t;
 					}
 				});
 				if (this.maps.length < 1) {
 					api.games.maps.read(this.id).done(function(data) {
-						app.maps = Object.assign({}, app.maps, data.data);
+						app.maps = Object.assign({}, app.maps, data);
 					});
 				}
 				api.games.players.read(this.id).done(function(data) {
-					if (!data.data) {
+					if (!data) {
 						return;
 					}
-					data.data.sort(function(a, b) {
+					data.sort(function(a, b) {
 						if (a.score > b.score) {
 							return -1;
 						} else if (a.score < b.score) {
@@ -103,10 +103,10 @@ if ($('#games').length) {
 						}
 						return 0;
 					});
-					app.players = Object.assign({}, data.data);
+					app.players = Object.assign({}, data);
 				});
 				api.games.vars.read(this.id).done(function(data) {
-					app.vars = Object.assign({}, app.vars, data.data);
+					app.vars = Object.assign({}, app.vars, data);
 				});
 				this.timer = setTimeout(this.refresh, 3000);
 			},
@@ -116,8 +116,8 @@ if ($('#games').length) {
 					cmd: this.cmd.input,
 					timeout: 0.5,
 				}).done(function(data) {
-					if (data.data) {
-						app.cmd.output = data.data;
+					if (data) {
+						app.cmd.output = data;
 					} else {
 						app.cmd.output = "No response.";
 					}
