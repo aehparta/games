@@ -48,7 +48,7 @@ class Game
 
     public function getMaps()
     {
-        return array();
+        return [];
     }
 
     public function getMap()
@@ -68,7 +68,7 @@ class Game
 
     public function getPlayers()
     {
-        return array();
+        return [];
     }
 
     public function getTeams()
@@ -108,12 +108,19 @@ class Game
 
     public function getMetadata()
     {
-        return cfg('games.' . $this->id . '.metadata', array());
+        return cfg('games.' . $this->id . '.metadata', []);
     }
 
-    public function send($command)
+    public function send($command, $timeout = null)
     {
-        return $this->rcon->send($command);
+        if ($timeout !== null) {
+            $this->setTimeout($timeout);
+        }
+        $data = $this->rcon->send($command);
+        if ($timeout !== null) {
+            $this->setTimeout();
+        }
+        return $data;
     }
 
     public function getVar($var_id)

@@ -1,17 +1,33 @@
 
-common:
-  pattern: /common
-
-games:
-  pattern: /api/games/{=call:Games\Game@getGame|=call:Games\Game@getGames}
-  call: Games\ApiController@games
-  format: json
-
-# game:
-#   pattern: /api/games/{=call:Games\Game@getGame}
-#   call: Games\ApiController@game
-#   format: json
-
 index:
   pattern: /
   call: Games\GamesController@index
+
+game:
+  pattern: /{=call:Games\Game@getGame,object}
+  call: Games\GamesController@game
+
+api:games:
+  pattern: /api/games/{=call:Games\Game@getGame,object|=call:Games\Game@getGames,array}
+  call: Games\ApiController@games
+  format: json
+
+api:games:cmd:
+  pattern: /api/games/{=call:Games\Game@getGame,object}/cmd
+  call: Games\ApiController@cmd
+  format: json
+
+api:games:maps:
+  pattern: /api/games/{game=call:Games\Game@getGame,object}/maps
+  call: game@getMaps
+  format: json
+
+api:games:vars:
+  pattern: /api/games/{=call:Games\Game@getGame,object}/vars/{|}
+  call: Games\ApiController@vars
+  format: json
+
+api:games:players:
+  pattern: /api/games/{=call:Games\Game@getGame,object}/players
+  call: Games\ApiController@players
+  format: json

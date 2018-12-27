@@ -16,7 +16,7 @@ class ApiController
         return $data;
     }
 
-    private function game($game)
+    public function game($game)
     {
         return [
             'id'       => $game->getId(),
@@ -39,41 +39,54 @@ class ApiController
             'metadata' => $game->getMetadata(),
         ];
     }
+
+    public function cmd($game)
+    {
+        $data    = http_request_payload_json();
+        if (!isset($data['cmd']) || !is_string($data['cmd'])) {
+            http_e418();
+        }
+        $timeout = null;
+        if (isset($data['timeout']) && is_numeric($data['timeout'])) {
+            $timeout = $data['timeout'];
+        }
+        return $game->send($data['cmd'], $timeout);
+    }
+
+    public function players($game)
+    {
+        $data = [];
+        foreach ($game->getPlayers() as $player) {
+            $data[] = $this->player($player);
+        }
+        return $data;
+    }
+
+    public function vars($game, $var)
+    {
+        if ($var === null) {
+            return $game->getVars();
+        }
+        return $game->getVar($var);
+    }
+
+    public function player($player)
+    {
+        return [
+            'id'     => $player->getId(),
+            'name'   => $player->getName(),
+            'bot'    => $player->isBot(),
+            'score'  => $player->getValue('score'),
+            'team'   => $player->getValue('team'),
+            'alive'  => $player->getValue('alive'),
+            'deaths' => $player->getValue('deaths'),
+        ];
+    }
 }
 
-// id:
-//   method: getId
-// label:
-//   method: getLabel
-// host:
-//   method: getHost
-// port:
-//   method: getPort
-// up:
-//   method: isUp
-// map:
-//   current:
-//     method: getMap
-//   next:
-//     method: getNextMap
-// players:
-//   method: getPlayerCount
-// teams:
-//   method: getTeams
-// round:
-//   method: getRoundStatus
-// actions:
-//   kick:
-//     method: has
-//     parameters:
-//       - kickPlayer
-//   kill:
-//     method: has
-//     parameters:
-//       - killPlayer
-//   rename:
-//     method: has
-//     parameters:
-//       - renamePlayer
-// metadata:
-//   method: getMetadata
+      // value:
+      //   type: string
+      //   required: false
+      //   method: setVarValue
+      //   parameters:
+      //     - var-id

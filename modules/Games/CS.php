@@ -92,7 +92,7 @@ class CS extends \Games\Game
         if (isset($status['players'])) {
             return $status['players'];
         }
-        return null;
+        return [];
     }
 
     public function getTeams()
@@ -101,7 +101,7 @@ class CS extends \Games\Game
         if (isset($status['teams'])) {
             return $status['teams'];
         }
-        return null;
+        return [];
     }
 
     public function getRoundStatus()
@@ -156,7 +156,7 @@ class CS extends \Games\Game
                     'round'     => $r['round'],
                 );
                 foreach ($r['players'] as $p) {
-                    $this->status['players'][] = new Player($p['name'], $p['score'], $p['bot'], $p);
+                    // $this->status['players'][] = Player::findOrCreate($p['name'], $p['score'], $p['bot'], $p);
                 }
                 cache()->set($this->id . '.status', $this->status, 5);
                 return $this->status;

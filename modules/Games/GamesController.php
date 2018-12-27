@@ -4,13 +4,13 @@ namespace Games;
 
 class GamesController
 {
-    public function index($path = null)
+    public function index()
     {
         return twig('games.html');
     }
 
-    public function game($game_id)
+    public function game($game)
     {
-        return $this->render('game.html');
+        return twig('game.html');
     }
 }
