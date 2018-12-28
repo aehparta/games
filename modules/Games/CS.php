@@ -35,7 +35,7 @@ class CS extends \Games\Game
     public function getMaps()
     {
         $maps = cache()->get($this->id . '.maps');
-        if ($maps) {
+        if (!empty($maps)) {
             return $maps;
         }
 
@@ -101,7 +101,7 @@ class CS extends \Games\Game
         if (isset($status['teams'])) {
             return $status['teams'];
         }
-        return [];
+        return null;
     }
 
     public function getRoundStatus()
@@ -127,7 +127,7 @@ class CS extends \Games\Game
 
     private function fetchStatus()
     {
-        if ($this->status !== null) {
+        if (is_array($this->status)) {
             return $this->status;
         }
 
@@ -135,6 +135,10 @@ class CS extends \Games\Game
         if ($status) {
             log_verbose('Status from cache');
             $this->status = $status;
+            return $this->status;
+        }
+
+        if ($this->status === false) {
             return $this->status;
         }
 

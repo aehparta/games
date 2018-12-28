@@ -42,9 +42,9 @@ class ApiController
 
     public function cmd($game)
     {
-        $data    = http_request_payload_json();
+        $data = http_request_payload_json();
         if (!isset($data['cmd']) || !is_string($data['cmd'])) {
-            http_e418();
+            http_e400();
         }
         $timeout = null;
         if (isset($data['timeout']) && is_numeric($data['timeout'])) {
@@ -67,6 +67,18 @@ class ApiController
         if ($var === null) {
             return $game->getVars();
         }
+        if (http_using_method(['put', 'post'])) {
+            $data = http_request_payload_json();
+            if (!isset($data['value']) || !is_string($data['value'])) {
+                http_e400();
+            }
+            $timeout = null;
+            if (isset($data['timeout']) && is_numeric($data['timeout'])) {
+                $game->setTimeout($data['timeout']);
+            }
+            $game->setVarValue($var, $data['value']);
+            $game->setTimeout();
+        }
         return $game->getVar($var);
     }
 
@@ -84,9 +96,9 @@ class ApiController
     }
 }
 
-      // value:
-      //   type: string
-      //   required: false
-      //   method: setVarValue
-      //   parameters:
-      //     - var-id
+// value:
+//   type: string
+//   required: false
+//   method: setVarValue
+//   parameters:
+//     - var-id

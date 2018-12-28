@@ -16,10 +16,16 @@ api:games:cmd:
   pattern: /api/games/{=call:Games\Game@getGame,object}/cmd
   call: Games\ApiController@cmd
   format: json
+  method: [ put, post ]
 
 api:games:maps:
   pattern: /api/games/{game=call:Games\Game@getGame,object}/maps
   call: game@getMaps
+  format: json
+
+api:games:map:
+  pattern: /api/games/{game=call:Games\Game@getGame,object}/map/{map}
+  call: game@setMap(map)
   format: json
 
 api:games:vars:
