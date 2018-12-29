@@ -220,7 +220,7 @@ class CS extends \Games\Game
                     $p_dst  = ['id' => $matches[6], 'name' => $matches[5], 'team' => $matches[7], 'bot' => $matches[6] == 'BOT'];
                 } else if (preg_match($psuicide, $line, $matches)) {
                     /* suicide */
-                    $action = 'kill';
+                    $action = 'suicide';
                     $tool   = $matches[4];
                     $p_src  = ['id' => $matches[3], 'name' => $matches[2], 'team' => $matches[4], 'bot' => $matches[3] == 'BOT'];
                 } else if (preg_match($pplanted, $line, $matches)) {

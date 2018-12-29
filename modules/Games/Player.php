@@ -67,11 +67,24 @@ class Player
             $player->setId($id);
             $player->setName($name);
             $player->setBot($bot);
-            em()->persist($player);
-            em()->flush();
         }
+        $player->setName($name);
         $player->setData($data);
+        em()->persist($player);
+        em()->flush();
 
         return $player;
+    }
+
+    public static function cmdPlayers($cmd, $args, $options)
+    {
+        $repo    = em()->getRepository(get_class());
+        $players = $repo->findAll();
+
+        foreach ($players as $player) {
+            echo str_pad($player->getId(), 24) . ' ' . $player->getName() . "\n";
+        }
+
+        return true;
     }
 }

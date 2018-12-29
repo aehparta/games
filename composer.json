@@ -59,7 +59,7 @@
     "url": "https://github.com/kehikko/twig.git",
     "type": "git"
   }, {
-    "url": "git@github.com:kehikko/profiler.git",
+    "url": "https://github.com/kehikko/profiler.git",
     "type": "git"
   }],
   "require": {
@@ -73,9 +73,8 @@
     "kehikko/route-admin": "^1.1",
     "kehikko/http": "dev-master",
     "kehikko/twig": "dev-master",
-    "kehikko/profiler": "dev-master",
     "symfony/cache": "^4.2",
-    "kehikko/data": "^1.0",
+    "kehikko/data": "dev-master",
     "doctrine/orm": "^2.6"
   }
 }

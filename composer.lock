@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "034adb30fc6ccda7c514eabfefd56ec1",
+    "content-hash": "35db08675a1507e508b76e38dff5dc10",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -970,7 +970,7 @@
         },
         {
             "name": "kehikko/data",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kehikko/Data.git",
@@ -1077,36 +1077,6 @@
             ],
             "description": "Kernel for kehikko framework",
             "time": "2018-12-27T11:10:31+00:00"
-        },
-        {
-            "name": "kehikko/profiler",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:kehikko/profiler.git",
-                "reference": "6eee0c84678512609fbb413793571a8ded904bbd"
-            },
-            "require": {
-                "php": ">=7.0.0",
-                "twig/twig": "^2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "profiler.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antti Partanen",
-                    "email": "aehparta@iki.fi"
-                }
-            ],
-            "description": "Profiling for kehikko framework",
-            "time": "2018-12-16T09:48:58+00:00"
         },
         {
             "name": "kehikko/route-account",
@@ -2134,7 +2104,7 @@
         "kehikko/route-account": 20,
         "kehikko/http": 20,
         "kehikko/twig": 20,
-        "kehikko/profiler": 20
+        "kehikko/data": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
