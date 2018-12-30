@@ -1,11 +1,32 @@
 
-paths:
-  tmp: tmp
+setup:
+  debug: true
+
+log:
+  syslog:
+    enabled: false
+    level: INFO
+  console:
+    enabled: true
+    level: VERBOSE
+  file:
+    level: VERBOSE
 
 cache:
-  type: phpfastcache
-  config:
-    path: '{path:tmp}'
+  enabled: true
+  call: Symfony\Component\Cache\Simple\FilesystemCache@
+  args:
+    - games          # namespace
+    - 300            # default ttl
+    - '{path.cache}' # path
+
+doctrine:
+  sql:
+    driver: mysqli
+    host: sql.lan
+    dbname: games
+    user: dev
+    password: dev
 
 games:
   aq:

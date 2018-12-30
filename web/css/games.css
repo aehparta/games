@@ -1,0 +1,93 @@
+.game-var-select {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #777;
+  background: #fff;
+}
+
+.game-player-face {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  float: left;
+}
+
+.game-player-name {
+  display: block;
+  font-weight: 900;
+}
+
+.game-player-score,
+.game-player-deaths {
+  font-size: 16px;
+  color: #333;
+  font-weight: 700;
+}
+
+.game-player-score label,
+.game-player-deaths label {
+  color: #778;
+  font-weight: 300;
+}
+
+.game-player {
+  font-size: large;
+  background: #ffe0e0;
+}
+
+.game-player-alive {
+  background: #e0f0e0;
+}
+
+.game-player td {
+  vertical-align: middle!important;
+}
+
+.game-custom-command-clear {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+  height: 14px;
+  margin: auto;
+  font-size: 14px;
+  cursor: pointer;
+  color: #777;
+}
+
+#game-scoreboard {
+  z-index: 99;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  padding: 5px;
+  padding-left: 10px;
+  background: #000;
+  opacity: 0.777;
+  font-size: 18px;
+  font-weight: 900;
+  color: #a0c0a0;
+  height: 60px;
+}
+
+#map-current {
+  font-size: 28px;
+  top: -7px;
+}
+
+#map-next {
+  display: block;
+  font-size: 12px;
+}
+
+.map-thumb {
+  height: 55px;
+  padding-top: 5px;
+  padding-right: 10px;
+  filter: contrast(170%) grayscale(100%);
+}
+
+.pointer {
+  cursor: pointer;
+}
